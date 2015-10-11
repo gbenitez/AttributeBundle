@@ -1,5 +1,34 @@
 # Documentación Attributes 
 
+Registrar los bundles en el **AppKernel.php**:
+
+```php
+public function registerBundles()
+{
+    $bundles = array(
+            new AttributeBundle\AttributeBundle(),
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+        );
+    
+    ...
+}
+```
+En el **app/config/routing.yml** agregar:
+
+```yaml
+attribute:
+    resource: "@AttributeBundle/Controller/"
+    type:     annotation
+    prefix:   /admin/attributes
+``` 
+
+
+Agregar a la bd las tablas del bundle:
+
+    php app/console doctrine:database:create
+    php app/console doctrine:schema:update --force
+
+
 #### Entity Attributes
 
 | column | Descripción |
