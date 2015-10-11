@@ -1,0 +1,57 @@
+{% extends '@Attribute/base.html.twig' %}
+
+{% block page_header %}List{% endblock %}
+{% block page_header_right %}
+    <a href="{{ path('attribute_create') }}" class="btn btn-primary" id="add-translation">
+        <span aria-hidden="true" class="glyphicon glyphicon-plus"></span>add
+    </a>
+{% endblock %}
+{% block content %}
+
+    {% embed '@Attribute/box_filter.html.twig' with {
+    form: form_filter,
+    clear_path: path('attributes_list'),
+    container_class: 'col-sm-3',
+    } %}
+    {% endembed %}
+
+    {{ knp_pagination_render(pagination) }}
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>id</th>
+                <th>Name</th>
+                <th>Presentation</th>
+                <th>Type</th>
+                <th>Target Entity</th>
+                <th>Active</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in pagination %}
+                <tr>
+                    <td>{{ item.id }}</td>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.presentation }}</td>
+                    <td>{{ item.type }}</td>
+                    <td>{{ item.targetEntity }}</td>
+                    <td>{% if item.active %}<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>{% else %}<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>{% endif %}</td>
+                    <td>{{ block('row_actions') }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+{% block row_actions %}
+    {% embed '@Attribute/dropdown.html.twig' with {align: 'right'} %}
+        {% from '@Attribute/dropdown.html.twig' import item, divider %}
+        {% from '@Attribute/icons.html.twig' import icon_edit, icon %}
+        {% block header %}Actions{% endblock %}
+        {% block body %}
+                {{ item(path("attribute_edit", {id: item.id}), 'btn.edit'|trans, icon_edit()) }}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

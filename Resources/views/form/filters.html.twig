@@ -1,0 +1,13 @@
+{% extends 'bootstrap_3_layout.html.twig' %}
+
+{% block form_row %}
+    <div class="{{ container_class|default }}">
+        {{ parent() }}
+    </div>
+{% endblock %}
+
+{%- block form_rows -%}
+    {% for child in form %}
+        {{- form_row(child, {container_class: container_class|default}) -}}
+    {% endfor %}
+{%- endblock form_rows -%}

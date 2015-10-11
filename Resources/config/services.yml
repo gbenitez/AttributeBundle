@@ -1,0 +1,30 @@
+services:
+#    attribute.example:
+#        class: AttributeBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
+    attribute.attribute_value:
+        class: AttributeBundle\Form\Type\AttributeValueType
+        arguments:
+            - @=service('doctrine.orm.entity_manager').getRepository('AttributeBundle:Attribute')
+        tags:
+            - { name: form.type, alias: attribute_value }
+
+    attribute.attributes:
+        class: AttributeBundle\Form\Type\AttributesType
+        tags:
+            - { name: form.type, alias: attributes }
+
+    attribute.repository:
+        class: AttributeBundle\Entity\Repository\AttributeRepository
+        factory: [@doctrine.orm.entity_manager, getRepository]
+        arguments: [AttributeBundle:Attribute]
+
+    attribute.yaml:
+        class: AttributeBundle\Form\Type\YamlType
+        tags:
+            - { name: form.type, alias: yaml }
+
+    attribute.manager:
+        class: AttributeBundle\Model\AttributeManager
+        arguments:
+            - @doctrine.orm.entity_manager

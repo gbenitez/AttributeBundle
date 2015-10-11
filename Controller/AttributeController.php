@@ -1,0 +1,76 @@
+<?php
+
+namespace AttributeBundle\Controller;
+
+use AttributeBundle\Entity\Attribute;
+use AttributeBundle\Form\Type\AttributeAdminType;
+use AttributeBundle\Form\Type\AttributeFilterType;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+
+
+class AttributeController extends Controller
+{
+    /**
+     * @Route("/list", name="attributes_list")
+     */
+    public function indexAction(Request $request)
+    {
+        $formFilter = $this->createForm(new AttributeFilterType(), array())->handleRequest($request);
+
+        $query = $this->get('attribute.repository')->getQueryAll($formFilter->getData());
+
+        $items = $this->get('knp_paginator')->paginate($query, $request->get('page', 1));
+
+        return $this->render('AttributeBundle:admin:list.html.twig', array(
+            'pagination' => $items,
+            'form_filter' => $formFilter->createView(),
+        ));
+    }
+    /**
+     * @Route("/create", name="attribute_create")
+     *
+     */
+    public function createAction(Request $request)
+    {
+        $form = $this->createForm(new AttributeAdminType(), $attribute = new Attribute())
+            ->handleRequest($request);
+
+        if ($form->isSubmitted() and $form->isValid()) {
+            $attribute->setCreatedAt(new \Datetime('NOW'));
+            $this->get('attribute.manager')->saveAttribute($attribute);
+
+            $this->addFlash('success', 'Attribute Created');
+
+            return $this->redirectToRoute('attributes_list');
+        }
+
+        return $this->render('AttributeBundle:admin:create.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
+    /**
+     * @Route("/edit/{id}", name="attribute_edit")
+     *
+     */
+    public function editAction(Request $request, Attribute $attribute)
+    {
+        $form = $this->createForm(new AttributeAdminType(), $attribute)
+            ->handleRequest($request);
+
+        if ($form->isSubmitted() and $form->isValid()) {
+
+            $this->get('attribute.manager')->saveAttribute($attribute);
+
+            $this->addFlash('success', 'Attribute Updated');
+
+            return $this->redirectToRoute('attributes_list');
+        }
+
+        return $this->render('AttributeBundle:admin:edit.html.twig', array(
+            'form' => $form->createView(),
+            'attribute' => $attribute,
+        ));
+    }
+}

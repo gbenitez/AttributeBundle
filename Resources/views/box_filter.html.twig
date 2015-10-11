@@ -1,0 +1,21 @@
+{% form_theme form '@Attribute/form/filters.html.twig' %}
+{% set _header = block('header') %}
+{% set formSubmited = form.vars.submitted and app.request.get(form.vars.name, false) %}
+<div class="panel panel-filter panel-{{ type|default('default') }}" {% if id is defined %}id="{{ id }}"{% endif %}>
+    {% block form_start %}{{ form_start(form, {attr: {'class':'', 'novalidate' : 'novalidate'}}) }}{% endblock %}
+
+    <div class="panel-body ">
+        {% block fields %}
+            {{ form_widget(form, {container_class: container_class|default('col-sm-3')}) }}
+        {% endblock %}
+    </div>
+    <div class="panel-footer">
+        <div class="text-right">
+                <a href="{{ path('attributes_list') }}" class="btn btn-default ">{{ 'label.clear'|trans }}</a>
+                <button type="submit" class="btn btn-primary ">{{ 'label.search'|trans }}</button>
+        </div>
+    </div>
+    {% block form_end %}{{ form_end(form) }}{% endblock %}
+</div>
+
+
