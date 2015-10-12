@@ -60,7 +60,7 @@ Se agrega un campo de tipo attributes
 ```php
 ->add('attributes', 'attributes')
 ```
-####Ejemplo de la AttributeValueTargetEntity
+####Ejemplo de la Entity AttributeValueTargetEntity
 
 ```php
 <?php
@@ -213,7 +213,7 @@ class AttributeValueTestAttribute extends AbstractAttributeValue
 
 ```
 
-####Ejemplo de la TargetEntity
+####Ejemplo de la Entity TargetEntity
 ```php
 
 /**
