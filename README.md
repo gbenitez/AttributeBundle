@@ -21,6 +21,13 @@ attribute:
     type:     annotation
     prefix:   /admin/attributes
 ``` 
+En el **app/config/config.yml** agregar:
+
+```yaml
+attribute:
+    bundles:
+        - AttributeBundle
+``` 
 
 
 Agregar a la bd las tablas del bundle:
