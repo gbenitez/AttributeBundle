@@ -50,9 +50,8 @@ Será la encargada de la relación con attribute y nuestra entidad y obtendrá e
 |value|Valor seleccionado o ingresado por el usuario de type array|
 |ID TargetEntity| Id de la nuestra entidad será ManyToOne|
 
-AttributeValueTargetEntity extenderá de una clase que llamamos **AbstractAttributeValue** y esta implementara una clase interfaz  **AttributeValueInterface** las misma están ubicadas en la carpeta Entity
+
 > Entity/AttributeValueTargetEntity.php
-> Entity/AbstractAttributeValue.php
 
 ####En nuestro formulario
 
