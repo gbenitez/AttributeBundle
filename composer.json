@@ -1,0 +1,19 @@
+{
+  "name": "gbenitez/AttributeBundle",
+  "type": "symfony-bundle",
+  "description": "Symfony Attribute Bundle para formularios",
+  "keywords": ["form", "attribute", "bundle"],
+  "require": {
+    "php": ">=5.5.12",
+    "symfony/framework-bundle": "~2.7",
+    "knplabs/knp-paginator-bundle": "~2.4"
+  },
+  "autoload": {
+    "psr-4": {"gbenitez\\Bundle\\AttributeBundle\\": ""}
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0-dev"
+    }
+  }
+}
