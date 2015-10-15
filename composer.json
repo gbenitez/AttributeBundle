@@ -1,5 +1,5 @@
 {
-  "name": "gbenitez/AttributeBundle",
+  "name": "gbenitez/attribute-bundle",
   "type": "symfony-bundle",
   "description": "Symfony Attribute Bundle para formularios",
   "keywords": ["form", "attribute", "bundle"],
