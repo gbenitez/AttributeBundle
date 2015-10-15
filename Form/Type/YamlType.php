@@ -1,6 +1,6 @@
 <?php
 
-namespace AttributeBundle\Form\Type;
+namespace gbenitez\Bundle\AttributeBundle\Form\Type;
 
 use AttributeBundle\Form\DataTransformer\ArrayToYamlTransformer;
 use Symfony\Component\Form\AbstractType;

@@ -1,6 +1,6 @@
 <?php
 
-namespace AttributeBundle\Form\Type;
+namespace gbenitez\Bundle\AttributeBundle\Form\Type;
 
 use AttributeBundle\Entity\Attribute;
 use AttributeBundle\Entity\AttributeValueInterface;
@@ -26,13 +26,18 @@ class AttributeValueType extends AbstractType
     protected $attributeRepository;
 
     /**
+     * @var \Doctrine\Common\Persistence\ObjectManager
+     */
+    protected $em;
+    /**
      * AttributeValueType constructor.
      *
      * @param AttributeRepository $attributeRepository
      */
-    public function __construct(AttributeRepository $attributeRepository)
+    public function __construct(AttributeRepository $attributeRepository, $em)
     {
         $this->attributeRepository = $attributeRepository;
+        $this->em = $em;
     }
 
     public function getName()
@@ -71,6 +76,39 @@ class AttributeValueType extends AbstractType
                     throw new InvalidArgumentException("No se reconoce el tipo de attributo \"{$type}\"");
             }
         });
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+            /**@var AttributeValueInterface $attributeValue */
+            $attributeValue = $event->getData();
+            $form = $event->getForm();
+
+            $attribute = $attributeValue->getAttribute();
+            $type = strtolower($attribute->getType());
+            $config = (array)$attribute->getConfiguration();
+
+            if ($type == AttributeTypes::ENTITY) {
+                if ($attributeValue->getValue()){
+                    $entity = $this->em->getRepository($config['class'])->find($attributeValue->getValue());
+
+                    $attributeValue->setValue($entity);
+                }
+
+            }
+        });
+        $builder->addEventListener(FormEvents::SUBMIT, function (FormEvent $event) {
+            /**@var AttributeValueInterface $attributeValue */
+            $attributeValue = $event->getData();
+            $form = $event->getForm();
+
+            $attribute = $attributeValue->getAttribute();
+            $type = strtolower($attribute->getType());
+
+            if ($type == AttributeTypes::ENTITY) {
+                if ($attributeValue->getValue()->getId()) {
+                    $attributeValue->setValue($attributeValue->getValue()->getId());
+                }
+            }
+        });
+
     }
 
     /**

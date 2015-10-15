@@ -1,6 +1,6 @@
 <?php
 
-namespace AttributeBundle\Entity;
+namespace gbenitez\Bundle\AttributeBundle\tributeBundle\Entity;
 
 /**
  * @author Manuel Aguirre <programador.manuel@gmail.com>

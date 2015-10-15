@@ -6,7 +6,7 @@
  * Time: 02:06 PM
  */
 
-namespace AttributeBundle\Model;
+namespace gbenitez\Bundle\AttributeBundle\Model;
 
 
 use AttributeBundle\Entity\Attribute;

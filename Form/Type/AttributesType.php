@@ -1,6 +1,6 @@
 <?php
 
-namespace AttributeBundle\Form\Type;
+namespace gbenitez\Bundle\AttributeBundle\Form\Type;
 
 use AttributeBundle\Entity\Attribute;
 use AttributeBundle\Entity\AttributeValueInterface;

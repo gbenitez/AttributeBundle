@@ -1,6 +1,6 @@
 <?php
 
-namespace AttributeBundle\Entity;
+namespace gbenitez\Bundle\AttributeBundle\tributeBundle\Entity;
 
 use AttributeBundle\Model\AttributeTypes;
 use Doctrine\ORM\Mapping as ORM;

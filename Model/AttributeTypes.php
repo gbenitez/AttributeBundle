@@ -6,7 +6,7 @@
  * Time: 08:34
  */
 
-namespace AttributeBundle\Model;
+namespace gbenitez\Bundle\AttributeBundle\Model;
 
 
 class AttributeTypes

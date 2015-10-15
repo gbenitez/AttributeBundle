@@ -1,6 +1,6 @@
 <?php
 
-namespace AttributeBundle\Controller;
+namespace gbenitez\Bundle\AttributeBundle\AttributeBundle\Controller;
 
 use AttributeBundle\Entity\Attribute;
 use AttributeBundle\Form\Type\AttributeAdminType;

@@ -6,7 +6,7 @@
  * Time: 08:58 PM
  */
 
-namespace AttributeBundle\Form\Type;
+namespace gbenitez\Bundle\AttributeBundle\Form\Type;
 
 
 use Symfony\Component\Form\AbstractType;

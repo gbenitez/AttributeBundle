@@ -1,6 +1,6 @@
 <?php
 
-namespace AttributeBundle\Entity\Repository;
+namespace gbenitez\Bundle\AttributeBundle\AttributeBundle\Entity\Repository;
 
 
 use Doctrine\ORM\EntityRepository;
