@@ -1,6 +1,6 @@
 <?php
 
-namespace gbenitez\BundleAttributeBundle;
+namespace gbenitez\Bundle\AttributeBundle;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;

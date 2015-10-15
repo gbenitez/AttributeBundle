@@ -1,12 +1,19 @@
 # Documentación Attributes 
 
+Agregar al composer.json:
+
+```php
+"require" : {
+   "gbenitez/attribute-bundle": "dev-master"
+}
+```
 Registrar los bundles en el **AppKernel.php**:
 
 ```php
 public function registerBundles()
 {
     $bundles = array(
-            new AttributeBundle\AttributeBundle(),
+            new gbenitez\Bundle\AttributeBundle\AttributeBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
         );
     
