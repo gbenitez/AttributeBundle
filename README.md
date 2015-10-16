@@ -282,7 +282,7 @@ class AttributeValueTargetEntity extends AbstractAttributeValue
      */
     public function editAction(Request $request, TargetEntity $targetEntity)
     {
-        if (count($testAttribute->getAttributes()) == 0) {
+        if (count($targetEntity->getAttributes()) == 0) {
         //repository del attribute entity
             $attrRepoCompany = $this->get('attribute.repository')->findBy(
                 array(
