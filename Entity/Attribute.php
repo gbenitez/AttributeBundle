@@ -1,8 +1,8 @@
 <?php
 
-namespace gbenitez\Bundle\AttributeBundle\tributeBundle\Entity;
+namespace gbenitez\Bundle\AttributeBundle\Entity;
 
-use AttributeBundle\Model\AttributeTypes;
+use gbenitez\Bundle\AttributeBundle\Model\AttributeTypes;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -12,7 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Attributes
  *
  * @ORM\Table(name="attribute")
- * @ORM\Entity(repositoryClass="AttributeBundle\Entity\Repository\AttributeRepository")
+ * @ORM\Entity(repositoryClass="gbenitez\Bundle\AttributeBundle\Entity\Repository\AttributeRepository")
  *
  */
 class Attribute

@@ -9,7 +9,7 @@
 namespace gbenitez\Bundle\AttributeBundle\Model;
 
 
-use AttributeBundle\Entity\Attribute;
+use gbenitez\Bundle\AttributeBundle\Entity\Attribute;
 use Doctrine\ORM\EntityManager;
 
 class AttributeManager

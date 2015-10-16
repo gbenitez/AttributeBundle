@@ -2,7 +2,7 @@
 
 namespace gbenitez\Bundle\AttributeBundle\Form\Type;
 
-use AttributeBundle\Form\DataTransformer\ArrayToYamlTransformer;
+use gbenitez\Bundle\AttributeBundle\Form\DataTransformer\ArrayToYamlTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 

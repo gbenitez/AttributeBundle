@@ -8,7 +8,7 @@
 
 namespace gbenitez\Bundle\AttributeBundle\Form\Type;
 
-use AttributeBundle\Model\AttributeTypes;
+use gbenitez\Bundle\AttributeBundle\Model\AttributeTypes;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -64,7 +64,7 @@ class AttributeAdminType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AttributeBundle\Entity\Attribute',
+            'data_class' => 'gbenitez\Bundle\AttributeBundle\Entity\Attribute',
         ));
     }
 }

@@ -1,10 +1,10 @@
 <?php
 
-namespace gbenitez\Bundle\AttributeBundle\AttributeBundle\Controller;
+namespace gbenitez\Bundle\AttributeBundle\Controller;
 
-use AttributeBundle\Entity\Attribute;
-use AttributeBundle\Form\Type\AttributeAdminType;
-use AttributeBundle\Form\Type\AttributeFilterType;
+use gbenitez\Bundle\AttributeBundle\Entity\Attribute;
+use gbenitez\Bundle\AttributeBundle\Form\Type\AttributeAdminType;
+use gbenitez\Bundle\AttributeBundle\Form\Type\AttributeFilterType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;

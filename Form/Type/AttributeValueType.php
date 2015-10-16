@@ -2,10 +2,10 @@
 
 namespace gbenitez\Bundle\AttributeBundle\Form\Type;
 
-use AttributeBundle\Entity\Attribute;
-use AttributeBundle\Entity\AttributeValueInterface;
-use AttributeBundle\Entity\Repository\AttributeRepository;
-use AttributeBundle\Model\AttributeTypes;
+use gbenitez\Bundle\AttributeBundle\Entity\Attribute;
+use gbenitez\Bundle\AttributeBundle\Entity\AttributeValueInterface;
+use gbenitez\Bundle\AttributeBundle\Entity\Repository\AttributeRepository;
+use gbenitez\Bundle\AttributeBundle\Model\AttributeTypes;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Exception\InvalidArgumentException;
 use Symfony\Component\Form\Exception\LogicException;

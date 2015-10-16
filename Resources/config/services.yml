@@ -16,7 +16,7 @@ services:
             - { name: form.type, alias: attributes }
 
     attribute.repository:
-        class: gbenitez\Bundle\AttributeBundle\Entity\Repository\AttributeRepository
+        class: AttributeBundle\Entity\Repository\AttributeRepository
         factory: [@doctrine.orm.entity_manager, getRepository]
         arguments: [AttributeBundle:Attribute]
 
