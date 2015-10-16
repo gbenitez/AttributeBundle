@@ -1,6 +1,6 @@
 <?php
 
-namespace AttributeBundle\DependencyInjection;
+namespace gbenitez\Bundle\AttributeBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
