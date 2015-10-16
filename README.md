@@ -107,7 +107,7 @@ class AttributeValueTestAttribute extends AbstractAttributeValue
     /**
      * @var string
      *
-     * @ORM\ManyToOne(targetEntity="AttributeBundle\Entity\Attribute")
+     * @ORM\ManyToOne(targetEntity="gbenitez\Bundle\AttributeBundle\Entity\Attribute")
      * @Assert\NotBlank()
      */
     protected $attribute;
@@ -122,10 +122,10 @@ class AttributeValueTestAttribute extends AbstractAttributeValue
     /**
      * @var string
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\TestAttribute")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\TargetEntity")
      * @Assert\NotBlank()
      */
-    private $testAttribute;
+    private $targetEntityAttribute;
 
     /**
      * AttributeValueCompany constructor.
@@ -133,10 +133,10 @@ class AttributeValueTestAttribute extends AbstractAttributeValue
      * @param string $attribute
      * @param string $company
      */
-    public function __construct(Attribute $attribute = null, TestAttribute $testAttribute = null)
+    public function __construct(Attribute $attribute = null, TargetEntity $targetEntityAttribute = null)
     {
         $this->attribute = $attribute;
-        $this->testAttribute = $testAttribute;
+        $this->testAttribute = $targetEntityAttribute;
     }
 
 
@@ -205,21 +205,21 @@ class AttributeValueTestAttribute extends AbstractAttributeValue
     }
     /**
      * @return string
-     * @return \AppBundle\Entity\TestAttribute
+     * @return \AppBundle\Entity\TargetEntity
      */
-    public function getTestAttribute()
+    public function getTargetEntityAttribute()
     {
-        return $this->testAttribute;
+        return $this->targetEntityAttribute;
     }
 
     /**
-     * Get company
+     * Get targetEntityAttribute
      *
-     * @return \AppBundle\Entity\TestAttribute
+     * @return \AppBundle\Entity\TargetEntity
      */
-    public function setTestAttribute(\AppBundle\Entity\TestAttribute $testAttribute)
+    public function setTargetEntityAttribute(\AppBundle\Entity\TargetEntity $targetEntityAttribute)
     {
-        $this->testAttribute = $testAttribute;
+        $this->targetEntityAttribute = $targetEntityAttribute;
         return $this;
     }
 
