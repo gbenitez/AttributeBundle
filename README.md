@@ -81,19 +81,19 @@ Se agrega un campo de tipo attributes
 
 namespace AppBundle\Entity;
 
-use AttributeBundle\Entity\AbstractAttributeValue;
-use AttributeBundle\Entity\Attribute;
-use AttributeBundle\Model\AttributeTypes;
+use gbenitez\Bundle\AttributeBundle\Entity\AbstractAttributeValue;
+use gbenitez\Bundle\AttributeBundle\Entity\Attribute;
+use gbenitez\Bundle\AttributeBundle\Model\AttributeTypes;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * AttributeValues
  *
- * @ORM\Table(name="attribute_value_Test_Attribute")
+ * @ORM\Table(name="attribute_value_target_entity")
  * @ORM\Entity
  */
-class AttributeValueTestAttribute extends AbstractAttributeValue
+class AttributeValueTargetEntity extends AbstractAttributeValue
 {
     /**
      * @var integer
@@ -131,12 +131,12 @@ class AttributeValueTestAttribute extends AbstractAttributeValue
      * AttributeValueCompany constructor.
      *
      * @param string $attribute
-     * @param string $company
+     * @param string $targetEntityAttribute
      */
     public function __construct(Attribute $attribute = null, TargetEntity $targetEntityAttribute = null)
     {
         $this->attribute = $attribute;
-        $this->testAttribute = $targetEntityAttribute;
+        $this->targetEntityAttribute = $targetEntityAttribute;
     }
 
 
@@ -234,7 +234,7 @@ class AttributeValueTestAttribute extends AbstractAttributeValue
      * @var Assert\Collection
      *
      * @ORM\OneToMany(
-     *  targetEntity="AppBundle\Entity\AttributeValueTestAttribute",
+     *  targetEntity="AppBundle\Entity\AttributeValueTargetEntity",
      *  mappedBy="TargetEntity",
      *  cascade={"all"},
      *  orphanRemoval=true
@@ -253,15 +253,15 @@ class AttributeValueTestAttribute extends AbstractAttributeValue
     /**
      * Add attributes
      *
-     * @param \AppBundle\Entity\AttributeValueTestAttribute $attributes
+     * @param \AppBundle\Entity\AttributeValueTargetEntity $attributes
      *
-     * @return Company
+     * @return TargetEntity
      */
-    public function addAttributes(\AppBundle\Entity\AttributeValueTestAttribute $attributes)
+    public function addAttributes(\AppBundle\Entity\AttributeValueTargetEntity $attributes)
     {
         $this->attributes[] = $attributes;
 
-        $attributes->setTestAttribute($this);
+        $attributes->setTargetEntityAttribute($this);
 
         return $this;
     }
@@ -269,13 +269,13 @@ class AttributeValueTestAttribute extends AbstractAttributeValue
     /**
      * Remove attributes
      *
-     * @param \AppBundle\Entity\AttributeValueTestAttribute $attributes
+     * @param \AppBundle\Entity\AttributeValueTargetEntity $attributes
      */
-    public function removeAttributes(\AppBundle\Entity\AttributeValueTestAttribute $attributes)
+    public function removeAttributes(\AppBundle\Entity\AttributeValueTargetEntity $attributes)
     {
         $this->attributes->removeElement($attributes);
 
-        $attributes->setTestAttribute(null);
+        $attributes->setTargetEntityAttribute(null);
     }
 
     /**
