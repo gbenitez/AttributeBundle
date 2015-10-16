@@ -220,7 +220,7 @@ class AttributeValueTargetEntity extends AbstractAttributeValue
      *
      * @ORM\OneToMany(
      *  targetEntity="AppBundle\Entity\AttributeValueTargetEntity",
-     *  mappedBy="TargetEntity",
+     *  mappedBy="targetEntityAttribute",
      *  cascade={"all"},
      *  orphanRemoval=true
      * )
