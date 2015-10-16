@@ -22,19 +22,11 @@ public function registerBundles()
 En el **app/config/routing.yml** agregar:
 
 ```yaml
-attribute:
+gbenitez_attribute:
     resource: "@AttributeBundle/Controller/"
     type:     annotation
     prefix:   /admin/attributes
 ```
-En el **app/config/config.yml** agregar:
-
-```yaml
-gbenitez_attribute:
-    bundles:
-        - AttributeBundle
-```
-
 
 Agregar a la bd las tablas del bundle:
 
