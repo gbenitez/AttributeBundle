@@ -323,7 +323,7 @@ Se agrega un campo de tipo attributes
 
 admin/attributes/list
 
-#### Ejemplo para la configuracion de un campo type choice
+#### Ejemplo para la configuración de un campo type choice
 
 ```yaml
 choices:
@@ -334,7 +334,7 @@ expanded: true
 required: true
 ```
 
-#### Ejemplo para la configuracion de un campo type entity
+#### Ejemplo para la configuración de un campo type entity
 
 ```yaml
 class: AppBundle\Entity\Country
