@@ -1,4 +1,4 @@
-# Documentación Attributes 
+#### Documentación Attributes 
 
 Agregar al composer.json:
 
@@ -16,7 +16,6 @@ public function registerBundles()
             new gbenitez\Bundle\AttributeBundle\AttributeBundle(),
             new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
         );
-    
     ...
 }
 ```
@@ -27,14 +26,14 @@ attribute:
     resource: "@AttributeBundle/Controller/"
     type:     annotation
     prefix:   /admin/attributes
-``` 
+```
 En el **app/config/config.yml** agregar:
 
 ```yaml
 attribute:
     bundles:
         - AttributeBundle
-``` 
+```
 
 
 Agregar a la bd las tablas del bundle:
@@ -67,13 +66,7 @@ Será la encargada de la relación con attribute y nuestra entidad y obtendrá e
 
 > Entity/AttributeValueTargetEntity.php
 
-####En nuestro formulario
 
-Se agrega un campo de tipo attributes
-
-```php
-->add('attributes', 'attributes')
-```
 ####Ejemplo de la Entity AttributeValueTargetEntity
 
 ```php
@@ -147,7 +140,7 @@ class AttributeValueTargetEntity extends AbstractAttributeValue
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -227,7 +220,7 @@ class AttributeValueTargetEntity extends AbstractAttributeValue
 
 ```
 
-####Ejemplo de la Entity TargetEntity
+#### Ejemplo de la Entity TargetEntity
 ```php
 
 /**
@@ -288,4 +281,48 @@ class AttributeValueTargetEntity extends AbstractAttributeValue
         return $this->attributes;
     }
 
+```
+#### Ejemplo de Nuestro controlador para cargar los attribute
+```php
+/**
+     * @Route("/admin/edit/{id}", name="admin_edit")
+     *
+     */
+    public function editAction(Request $request, TargetEntity $targetEntity)
+    {
+        if (count($testAttribute->getAttributes()) == 0) {
+        //repository del attribute entity
+            $attrRepoCompany = $this->get('attribute.repository')->findBy(
+                array(
+                    'active' => 1
+                ),
+                array('position' => 'ASC')
+            );
+            foreach ($attrRepoCompany as $attributeTargetEntity) {
+                $testAttribute->addAttributes(new AttributeValueTargetEntity($attributeTargetEntity, $targetEntity));
+            }
+        }
+
+        $form = $this->createForm(new TargetEntityType(), $targetEntity, array(
+            'action' => $request->getRequestUri(),
+        ))->handleRequest($request);
+
+        if ($form->isSubmitted() and $form->isValid()) {
+
+            $this->getDoctrine()->getEntityManager()->persist($targetEntity);
+            $this->getDoctrine()->getEntityManager()->flush();
+
+            return $this->redirectToRoute('homepage');
+        }
+
+        return $this->render('default/index.html.twig' , array('form' => $form->createView()) );
+    }
+
+```
+#### En nuestro formulario TargetEntityType()
+
+Se agrega un campo de tipo attributes
+
+```php
+->add('attributes', 'attributes')
 ```
