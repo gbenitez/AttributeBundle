@@ -30,7 +30,7 @@ attribute:
 En el **app/config/config.yml** agregar:
 
 ```yaml
-attribute:
+gbenitez_attribute:
     bundles:
         - AttributeBundle
 ```
