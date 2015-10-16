@@ -51,7 +51,7 @@
         {% from '@Attribute/icons.html.twig' import icon_edit, icon %}
         {% block header %}Actions{% endblock %}
         {% block body %}
-                {{ item(path("attribute_edit", {id: item.id}), 'btn.edit'|trans, icon_edit()) }}
+                {{ item(path("attribute_edit", {id: item.id}), 'edit'|trans, icon_edit()) }}
         {% endblock %}
     {% endembed %}
 {% endblock %}

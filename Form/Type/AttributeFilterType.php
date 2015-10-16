@@ -30,7 +30,7 @@ class AttributeFilterType extends AbstractType
         $builder
             ->add('search', 'text', array(
                 'required' => false,
-                'label' => 'label.search',
+                'label' => 'Name',
             ));
 
     }

@@ -318,3 +318,24 @@ Se agrega un campo de tipo attributes
 ```php
 ->add('attributes', 'attributes')
 ```
+
+#### CRUD para la carga de attributes
+
+admin/attributes/list
+
+#### Ejemplo para la configuracion de un campo type choice
+
+```yaml
+choices:
+    1: label.yes
+    0: label.no
+multiple: false
+expanded: true
+required: true
+```
+
+#### Ejemplo para la configuracion de un campo type entity
+
+```yaml
+class: AppBundle\Entity\Country
+```

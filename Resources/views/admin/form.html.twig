@@ -51,8 +51,8 @@
     </div>
     {{ form_widget(form) }}
     {% block form_actions %}
-        {{ save() }}
-        {{ back(path('attributes_list')) }}
+        {{ save('Save') }}
+        {{ back(path('attributes_list'), 'Back') }}
     {% endblock %}
     {{ form_end(form) }}
 {% endblock %}

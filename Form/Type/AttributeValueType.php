@@ -103,7 +103,7 @@ class AttributeValueType extends AbstractType
             $type = strtolower($attribute->getType());
 
             if ($type == AttributeTypes::ENTITY) {
-                if ($attributeValue->getValue()->getId()) {
+                if ($attributeValue->getValue()) {
                     $attributeValue->setValue($attributeValue->getValue()->getId());
                 }
             }
