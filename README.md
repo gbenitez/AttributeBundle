@@ -291,7 +291,7 @@ class AttributeValueTargetEntity extends AbstractAttributeValue
                 array('position' => 'ASC')
             );
             foreach ($attrRepoCompany as $attributeTargetEntity) {
-                $testAttribute->addAttributes(new AttributeValueTargetEntity($attributeTargetEntity, $targetEntity));
+                $targetEntity->addAttributes(new AttributeValueTargetEntity($attributeTargetEntity, $targetEntity));
             }
         }
 
