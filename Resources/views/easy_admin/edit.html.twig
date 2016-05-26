@@ -1,0 +1,8 @@
+{% extends '@EasyAdmin/default/edit.html.twig' %}
+
+
+{% block body_javascript %}
+    {{ parent() }}
+
+    {{ include('@Attribute/easy_admin/import_ace_plugin.html.twig') }}
+{% endblock %}

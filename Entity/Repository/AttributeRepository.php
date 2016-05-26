@@ -19,4 +19,16 @@ class AttributeRepository extends EntityRepository
 
         return $q;
     }
+
+    /**
+     * @param string $name
+     * @return array
+     */
+    public function findActiveAttributesByEntity($name)
+    {
+        return $this->findBy([
+            'active' => true,
+            'targetEntity' => $name,
+        ]);
+    }
 }

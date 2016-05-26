@@ -1,0 +1,14 @@
+{% extends '@Attribute/base.html.twig' %}
+
+{% block page_header %}Create Attribute{% endblock %}
+
+{% use '@Attribute/admin/form.html.twig' with javascript as js_form %}
+
+{% block content %}
+    {{ block('form') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ block('js_form') }}
+{% endblock %}

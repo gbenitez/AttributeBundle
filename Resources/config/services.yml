@@ -5,8 +5,8 @@ services:
     attribute.attribute_value:
         class: gbenitez\Bundle\AttributeBundle\Form\Type\AttributeValueType
         arguments:
-            - @=service('doctrine.orm.entity_manager').getRepository('AttributeBundle:Attribute')
-            - @doctrine.orm.entity_manager
+            - "@=service('doctrine.orm.entity_manager').getRepository('AttributeBundle:Attribute')"
+            - "@doctrine.orm.entity_manager"
         tags:
             - { name: form.type, alias: attribute_value }
 
@@ -17,15 +17,21 @@ services:
 
     attribute.repository:
         class: AttributeBundle\Entity\Repository\AttributeRepository
-        factory: [@doctrine.orm.entity_manager, getRepository]
+        factory: ["@doctrine.orm.entity_manager", getRepository]
         arguments: [AttributeBundle:Attribute]
 
     attribute.yaml:
         class: gbenitez\Bundle\AttributeBundle\Form\Type\YamlType
         tags:
-            - { name: form.type, alias: yaml }
+            - { name: form.type }
 
     attribute.manager:
         class: gbenitez\Bundle\AttributeBundle\Model\AttributeManager
         arguments:
-            - @doctrine.orm.entity_manager
+            - "@doctrine.orm.entity_manager"
+
+    attribute.form.type.target_entity:
+        class: gbenitez\Bundle\AttributeBundle\Form\Type\Admin\TargetEntityType
+        arguments: [{Deal: Deal, Project: Project}]
+        tags:
+            - { name: "form.type" }
