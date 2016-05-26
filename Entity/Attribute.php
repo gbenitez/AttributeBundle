@@ -2,22 +2,19 @@
 
 namespace gbenitez\Bundle\AttributeBundle\Entity;
 
-use gbenitez\Bundle\AttributeBundle\Model\AttributeTypes;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\Collection;
-use Doctrine\Common\Collections\ArrayCollection;
+use gbenitez\Bundle\AttributeBundle\Model\AttributeTypes;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Attributes
  *
- * @ORM\Table(name="attribute")
+ * @ORM\Table(name="attribute_system_attribute")
  * @ORM\Entity(repositoryClass="gbenitez\Bundle\AttributeBundle\Entity\Repository\AttributeRepository")
  *
  */
 class Attribute
 {
-
     /**
      * @var integer
      *
@@ -69,10 +66,16 @@ class Attribute
      * @ORM\Column(name="target_entity", type="string", length=50, nullable=true)
      */
     private $targetEntity;
+
     /**
      * @ORM\Column(name="position", type="integer" , nullable=true)
      */
     private $position;
+
+    /**
+     * @ORM\Column(name="javascript_code", type="text" , nullable=true)
+     */
+    private $javascriptCode;
 
     /**
      * @var \DateTime
@@ -289,7 +292,7 @@ class Attribute
      */
     private function setUpdatedAt(\DateTime $updatedAt)
     {
-        throw new \InvalidArgumentException("Esté valor no puede ser establecido manualmente");
+        throw new \InvalidArgumentException("Estï¿½ valor no puede ser establecido manualmente");
     }
 
     /**
@@ -300,5 +303,21 @@ class Attribute
     public function getUpdatedAt()
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getJavascriptCode()
+    {
+        return $this->javascriptCode;
+    }
+
+    /**
+     * @param mixed $javascriptCode
+     */
+    public function setJavascriptCode($javascriptCode)
+    {
+        $this->javascriptCode = $javascriptCode;
     }
 }

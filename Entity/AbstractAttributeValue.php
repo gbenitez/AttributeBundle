@@ -2,19 +2,31 @@
 
 namespace gbenitez\Bundle\AttributeBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
  * @author Manuel Aguirre <programador.manuel@gmail.com>
+ *
+ * @ORM\MappedSuperclass()
  */
-class AbstractAttributeValue implements AttributeValueInterface
+abstract class AbstractAttributeValue implements AttributeValueInterface
 {
     /**
      * @var Attribute
+     *
+     * @ORM\ManyToOne(targetEntity="gbenitez\Bundle\AttributeBundle\Entity\Attribute")
      */
     protected $attribute;
+
+    /**
+     * @var mixed
+     *
+     * @ORM\Column(name="value", type="array", length=255, nullable=true)
+     */
     protected $value;
 
     /**
-     * @return mixed
+     * @return Attribute
      */
     public function getAttribute()
     {

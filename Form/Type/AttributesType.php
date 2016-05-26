@@ -41,6 +41,7 @@ class AttributesType extends AbstractType
                     'label' => $attribute->getPresentation(),
                     'data' => $attributeValue,
                     'property_path' => '['. $index .']',
+                    'attribute' => $attribute,
                 ));
             }
         });

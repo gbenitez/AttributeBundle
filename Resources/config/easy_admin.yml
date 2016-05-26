@@ -1,0 +1,29 @@
+easy_admin:
+    entities:
+        Attribute:
+            class: gbenitez\Bundle\AttributeBundle\Entity\Attribute
+            label: Form Attributes
+            templates:
+                edit: "@Attribute/easy_admin/edit.html.twig"
+            list:
+                title: 'Form Attributes'
+                fields: ['id', 'name', 'presentation', 'type', 'targetEntity', 'active']
+            form:
+                fields:
+                    - 'name'
+                    - 'presentation'
+                    -
+                        property: 'targetEntity'
+                        type: 'gbenitez\Bundle\AttributeBundle\Form\Type\Admin\TargetEntityType'
+                    - { property: 'type' }
+                    -
+                        property: 'configuration'
+                        type: 'gbenitez\Bundle\AttributeBundle\Form\Type\YamlType'
+                        type_options:
+                            attr: { 'data-ace': 'yaml' }
+                    -
+                        property: 'javascriptCode'
+                        type: 'textarea'
+                        type_options:
+                            attr: { 'data-ace': 'javascript' }
+                    - 'active'
