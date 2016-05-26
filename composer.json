@@ -4,7 +4,7 @@
   "description": "Symfony Attribute Bundle para formularios",
   "keywords": ["form", "attribute", "bundle"],
   "require": {
-    "php": ">=5.5.12",
+    "php": ">=5.5.0",
     "symfony/framework-bundle": "~2.7",
     "knplabs/knp-paginator-bundle": "~2.4"
   },
