@@ -78,6 +78,11 @@ class Attribute
     private $javascriptCode;
 
     /**
+     * @ORM\Column(name="constraints", type="json_array", nullable=true)
+     */
+    private $constraints;
+
+    /**
      * @var \DateTime
      * @ORM\Column(name="created_at", type="datetime")
      */
@@ -319,5 +324,21 @@ class Attribute
     public function setJavascriptCode($javascriptCode)
     {
         $this->javascriptCode = $javascriptCode;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getConstraints()
+    {
+        return $this->constraints;
+    }
+
+    /**
+     * @param mixed $constraints
+     */
+    public function setConstraints($constraints)
+    {
+        $this->constraints = $constraints;
     }
 }

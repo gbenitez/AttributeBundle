@@ -14,6 +14,10 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\NotNull;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * @author Manuel Aguirre <programador.manuel@gmail.com>
@@ -29,16 +33,24 @@ class AttributeValueType extends AbstractType
      * @var \Doctrine\Common\Persistence\ObjectManager
      */
     protected $em;
+    /**
+     * @var TranslatorInterface
+     */
+    private $translator;
 
     /**
-     * AttributeValueType constructor.
-     *
      * @param AttributeRepository $attributeRepository
+     * @param \Doctrine\Common\Persistence\ObjectManager $em
+     * @param TranslatorInterface $translator
      */
-    public function __construct(AttributeRepository $attributeRepository, $em)
-    {
+    public function __construct(
+        AttributeRepository $attributeRepository,
+        \Doctrine\Common\Persistence\ObjectManager $em,
+        TranslatorInterface $translator
+    ) {
         $this->attributeRepository = $attributeRepository;
         $this->em = $em;
+        $this->translator = $translator;
     }
 
     public function getName()
@@ -64,6 +76,8 @@ class AttributeValueType extends AbstractType
                 'label' => $options['label'],
             );
 
+            $configuration['constraints'] = $this->createConstraintValidations($attribute);
+
             switch ($type) {
                 case AttributeTypes::TEXT:
                 case AttributeTypes::ENTITY:
@@ -86,7 +100,6 @@ class AttributeValueType extends AbstractType
         $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
             /**@var AttributeValueInterface $attributeValue */
             $attributeValue = $event->getData();
-            $form = $event->getForm();
 
             $attribute = $attributeValue->getAttribute();
             $type = strtolower($attribute->getType());
@@ -135,5 +148,53 @@ class AttributeValueType extends AbstractType
         $view->vars['_attribute'] = $options['attribute'];
     }
 
+    protected function createConstraintValidations(Attribute $attribute)
+    {
+        $constraints = [];
+        $addRequiredConstraint = $this->isAttributeRequired($attribute);
 
+        foreach ($attribute->getConstraints() as $classConstraint => $options) {
+            $className = $this->resolveClassConstraint($classConstraint);
+            $constraints[] = $constraint = new $className($options);
+
+            if ($constraint instanceof NotBlank || $constraint instanceof NotNull) {
+                $addRequiredConstraint = false;
+            }
+        }
+
+        if ($addRequiredConstraint) {
+            $message = $this->translator->trans('attribute.required', [
+                '%name%' => $attribute->getName(),
+                '%presentation%' => $attribute->getPresentation(),
+            ], 'validators');
+
+            $constraints[] = new NotBlank(['message' => $message]);
+        }
+
+        return $constraints;
+    }
+
+    private function resolveClassConstraint($class)
+    {
+        if (class_exists($class)) {
+            return $class;
+        }
+
+        if (class_exists($sfClass = '\Symfony\Component\Validator\Constraints\\'.$class)) {
+            return $sfClass;
+        }
+
+        throw new \Symfony\Component\Validator\Exception\InvalidArgumentException(
+            'No existe la clase constraint "'.$class.'""'
+        );
+    }
+
+    /**
+     * @param Attribute $attribute
+     * @return bool
+     */
+    private function isAttributeRequired(Attribute $attribute)
+    {
+        return isset($attribute->getConfiguration()['required']);
+    }
 }
