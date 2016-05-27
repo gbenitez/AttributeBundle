@@ -4,6 +4,7 @@ easy_admin:
             class: gbenitez\Bundle\AttributeBundle\Entity\Attribute
             label: Form Attributes
             templates:
+                new: "@Attribute/easy_admin/new.html.twig"
                 edit: "@Attribute/easy_admin/edit.html.twig"
             list:
                 title: 'Form Attributes'
@@ -18,6 +19,11 @@ easy_admin:
                     - { property: 'type' }
                     -
                         property: 'configuration'
+                        type: 'gbenitez\Bundle\AttributeBundle\Form\Type\YamlType'
+                        type_options:
+                            attr: { 'data-ace': 'yaml' }
+                    -
+                        property: constraints
                         type: 'gbenitez\Bundle\AttributeBundle\Form\Type\YamlType'
                         type_options:
                             attr: { 'data-ace': 'yaml' }
