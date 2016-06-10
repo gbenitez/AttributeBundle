@@ -6,7 +6,8 @@
         }
 
         {% for field in form if field.vars.attr['data-ace'] is defined %}
-            {% set editor_id = field.vars.id~'-editor' %}
+        {% set editor_id = field.vars.id~'-editor' %}
+        (function () {
             var $content = $("#{{ field.vars.id }}").hide();
             var $editor = $("<div />", {
                 id: '{{ editor_id }}',
@@ -23,6 +24,7 @@
             editorSession.on('change', function () {
                 $content.val(editorSession.getValue());
             });
+        })();
         {% endfor %}
 
     });
