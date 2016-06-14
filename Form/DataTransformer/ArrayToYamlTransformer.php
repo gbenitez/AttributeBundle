@@ -19,6 +19,16 @@ use Symfony\Component\Yaml\Yaml;
  */
 class ArrayToYamlTransformer implements DataTransformerInterface
 {
+    private $inlineLevel;
+
+    /**
+     * ArrayToYamlTransformer constructor.
+     * @param $inlineLevel
+     */
+    public function __construct($inlineLevel)
+    {
+        $this->inlineLevel = $inlineLevel;
+    }
 
     public function transform($value)
     {
@@ -26,7 +36,7 @@ class ArrayToYamlTransformer implements DataTransformerInterface
             return;
         }
 
-        return Yaml::dump($value);
+        return Yaml::dump($value, $this->inlineLevel);
     }
 
     public function reverseTransform($value)
