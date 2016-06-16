@@ -33,6 +33,12 @@ class Attribute
     private $name;
 
     /**
+     * @var Region
+     * @ORM\ManyToOne(targetEntity="Region", fetch="EAGER")
+     */
+    private $region;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="presentation", type="string", length=255)
@@ -362,5 +368,21 @@ class Attribute
     public function setOwner(AttributeOwnerInterface $owner)
     {
         $this->owner = $owner;
+    }
+
+    /**
+     * @return Region
+     */
+    public function getRegion()
+    {
+        return $this->region;
+    }
+
+    /**
+     * @param Region $region
+     */
+    public function setRegion(Region $region)
+    {
+        $this->region = $region;
     }
 }

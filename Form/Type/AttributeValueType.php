@@ -146,6 +146,7 @@ class AttributeValueType extends AbstractType
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
         $view->vars['_attribute'] = $options['attribute'];
+        $view->vars['_attribute_region_name'] = $options['attribute']->getRegion()->getName();
     }
 
     protected function createConstraintValidations(Attribute $attribute)
