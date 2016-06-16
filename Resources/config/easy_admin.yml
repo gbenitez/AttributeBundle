@@ -8,7 +8,7 @@ easy_admin:
                 edit: "@Attribute/easy_admin/edit.html.twig"
             list:
                 title: 'Form Attributes'
-                fields: ['id', 'name', 'presentation', 'type', 'targetEntity', 'active']
+                fields: ['id', 'name', 'presentation', 'type', 'targetEntity', 'region', 'active']
             form:
                 fields:
                     - 'name'
@@ -17,6 +17,11 @@ easy_admin:
                         property: 'targetEntity'
                         type: 'gbenitez\Bundle\AttributeBundle\Form\Type\Admin\TargetEntityType'
                     - { property: 'type' }
+                    -
+                        property: 'region'
+                        type: 'entity'
+                        type_options:
+                            class: gbenitez\Bundle\AttributeBundle\Entity\Region
                     -
                         property: 'configuration'
                         type: 'gbenitez\Bundle\AttributeBundle\Form\Type\YamlType'
@@ -33,3 +38,6 @@ easy_admin:
                         type_options:
                             attr: { 'data-ace': 'javascript' }
                     - 'active'
+        Region:
+            class: gbenitez\Bundle\AttributeBundle\Entity\Region
+            label: 'Regions [Attributes]'
