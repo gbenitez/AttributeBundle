@@ -83,6 +83,12 @@ class Attribute
     private $constraints;
 
     /**
+     * @ORM\ManyToOne(targetEntity="gbenitez\Bundle\AttributeBundle\Entity\AttributeOwnerInterface")
+     * @var AttributeOwnerInterface
+     */
+    protected $owner;
+
+    /**
      * @var \DateTime
      * @ORM\Column(name="created_at", type="datetime")
      */
@@ -112,7 +118,7 @@ class Attribute
      * Set name
      *
      * @param string $name
-     * @return Attributes
+     * @return Attribute
      */
     public function setName($name)
     {
@@ -135,7 +141,7 @@ class Attribute
      * Set presentation
      *
      * @param string $presentation
-     * @return Attributes
+     * @return Attribute
      */
     public function setPresentation($presentation)
     {
@@ -158,7 +164,7 @@ class Attribute
      * Set type
      *
      * @param integer $type
-     * @return Attributes
+     * @return Attribute
      */
     public function setType($type)
     {
@@ -190,7 +196,7 @@ class Attribute
      * Set configuration
      *
      * @param array $configuration
-     * @return Attributes
+     * @return Attribute
      */
     public function setConfiguration($configuration)
     {
@@ -215,7 +221,7 @@ class Attribute
      *
      * @param boolean $active
      *
-     * @return Term
+     * @return Attribute
      */
     public function setActive($active)
     {
@@ -340,5 +346,21 @@ class Attribute
     public function setConstraints($constraints)
     {
         $this->constraints = $constraints;
+    }
+
+    /**
+     * @return AttributeOwnerInterface
+     */
+    public function getOwner()
+    {
+        return $this->owner;
+    }
+
+    /**
+     * @param AttributeOwnerInterface $owner
+     */
+    public function setOwner(AttributeOwnerInterface $owner)
+    {
+        $this->owner = $owner;
     }
 }
