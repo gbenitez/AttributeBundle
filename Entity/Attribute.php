@@ -227,7 +227,7 @@ class Attribute
      *
      * @param boolean $active
      *
-     * @return Term
+     * @return Attribute
      */
     public function setActive($active)
     {
