@@ -36,3 +36,13 @@ services:
         arguments: [{Deal: Deal, Project: Project}]
         tags:
             - { name: "form.type" }
+
+    attribute.form.filter.attribute_region:
+        class: gbenitez\Bundle\AttributeBundle\Form\Region\AttributeRegionFilter
+        autowire: true
+
+    attribute.twig.extension.attribute:
+        class: gbenitez\Bundle\AttributeBundle\Twig\Extension\AttributeExtension
+        autowire: true
+        tags:
+            - { name: "twig.extension" }

@@ -21,6 +21,11 @@ easy_admin:
                         property: 'owner'
                         type: 'Symfony\Bridge\Doctrine\Form\Type\EntityType'
                     -
+                        property: 'region'
+                        type: 'entity'
+                        type_options:
+                            class: gbenitez\Bundle\AttributeBundle\Entity\Region
+                    -
                         property: 'configuration'
                         type: 'gbenitez\Bundle\AttributeBundle\Form\Type\YamlType'
                         type_options:
@@ -36,3 +41,6 @@ easy_admin:
                         type_options:
                             attr: { 'data-ace': 'javascript' }
                     - 'active'
+        Region:
+            class: gbenitez\Bundle\AttributeBundle\Entity\Region
+            label: 'Regions [Attributes]'
