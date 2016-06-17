@@ -17,9 +17,7 @@ easy_admin:
                         property: 'targetEntity'
                         type: 'gbenitez\Bundle\AttributeBundle\Form\Type\Admin\TargetEntityType'
                     - { property: 'type' }
-                    -
-                        property: 'owner'
-                        type: 'entity'
+                    - { property: 'owner' }
                     -
                         property: 'region'
                         type: 'entity'
