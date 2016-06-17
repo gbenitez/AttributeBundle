@@ -111,6 +111,14 @@ class Attribute
     protected $updatedAt;
 
     /**
+     * Attribute constructor.
+     */
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime('now');
+    }
+
+    /**
      * Get id
      *
      * @return integer
@@ -385,4 +393,5 @@ class Attribute
     {
         $this->region = $region;
     }
+
 }
