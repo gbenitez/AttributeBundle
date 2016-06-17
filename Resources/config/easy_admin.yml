@@ -19,7 +19,7 @@ easy_admin:
                     - { property: 'type' }
                     -
                         property: 'owner'
-                        type: 'Symfony\Bridge\Doctrine\Form\Type\EntityType'
+                        type: 'entity'
                     -
                         property: 'region'
                         type: 'entity'
