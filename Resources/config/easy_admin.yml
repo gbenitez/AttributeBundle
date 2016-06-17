@@ -8,7 +8,7 @@ easy_admin:
                 edit: "@Attribute/easy_admin/edit.html.twig"
             list:
                 title: 'Form Attributes'
-                fields: ['id', 'name', 'presentation', 'type', 'targetEntity', 'region', 'active']
+                fields: ['id', 'name', 'presentation', 'type', 'targetEntity', 'region', 'owner', 'active']
             form:
                 fields:
                     - 'name'
