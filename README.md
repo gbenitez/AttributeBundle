@@ -339,3 +339,20 @@ required: true
 ```yaml
 class: AppBundle\Entity\Country
 ```
+
+#### Para definir la relación con el Owner de un Attribute
+
+- Implementar en la entidad relación la interface:  
+
+gbenitez\Bundle\AttributeBundle\Entity\AttributeOwnerInterface
+
+- agregar al archivo app/config/config.yml :
+
+```yaml
+doctrine:
+    # ...
+    orm:
+        # ...
+        resolve_target_entities:
+            gbenitez\Bundle\AttributeBundle\Entity\AttributeOwnerInterface: Acme\AppBundle\Entity\EntidadRelacion
+```
