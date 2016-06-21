@@ -17,7 +17,7 @@ services:
             - { name: form.type, alias: attributes }
 
     attribute.repository:
-        class: AttributeBundle\Entity\Repository\AttributeRepository
+        class: gbenitez\Bundle\AttributeBundle\Entity\Repository\AttributeRepository
         factory: ["@doctrine.orm.entity_manager", getRepository]
         arguments: [AttributeBundle:Attribute]
 
@@ -33,7 +33,7 @@ services:
 
     attribute.form.type.target_entity:
         class: gbenitez\Bundle\AttributeBundle\Form\Type\Admin\TargetEntityType
-        arguments: [{Deal: Deal, Project: Project}]
+        arguments: [{Deal: Deal, Project: Project, Company: Company}]
         tags:
             - { name: "form.type" }
 

@@ -31,4 +31,30 @@ class AttributeRepository extends EntityRepository
             'targetEntity' => $name,
         ], ['position' => 'ASC']);
     }
+
+    /**
+     * @param $owner
+     * @return array
+     */
+    public function findActiveAttributesByOwner($owner)
+    {
+        return $this->findBy([
+            'active' => true,
+            'owner' => $owner,
+        ]);
+    }
+
+    /**
+     * @param $name
+     * @param $owner
+     * @return array
+     */
+    public function findActiveAttributesByEntityAndOwner($name, $owner)
+    {
+        return $this->findBy([
+            'active' => true,
+            'targetEntity' => $name,
+            'owner' => $owner
+        ]);
+    }
 }
