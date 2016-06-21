@@ -29,7 +29,7 @@ class AttributeRepository extends EntityRepository
         return $this->findBy([
             'active' => true,
             'targetEntity' => $name,
-        ]);
+        ], ['position' => 'ASC']);
     }
 
     /**

@@ -4,7 +4,6 @@ namespace gbenitez\Bundle\AttributeBundle\Form\Region;
 
 use gbenitez\Bundle\AttributeBundle\Entity\Attribute;
 use Symfony\Component\Form\FormView;
-use Symfony\Component\VarDumper\VarDumper;
 
 /**
  * @author Manuel Aguirre <programador.manuel@gmail.com>
@@ -15,31 +14,33 @@ class AttributeRegionFilter
      * Retorna los formularios que sean atributos y que se hayan creado para la región indicada
      *
      * @param array|\Iterator|FormView $forms formularios de donde se va a filtrar los atributos
-     * @param string $region nombre de la region
+     * @param string|array $regions nombre de la region o regiones
      * @return array Campos de formulario que cumplen con las condiciones.
      */
-    public function getAttributesByRegion($forms, $region)
+    public function getAttributesByRegion($forms, $regions)
     {
-        return iterator_to_array($this->filterForms($forms, $region));
+        $a = iterator_to_array($this->filterForms($forms, (array)$regions));
+        dump($regions, $a);
+        return $a;
     }
 
     /**
      * @param array|\Iterator|FormView $forms formularios de donde se va a filtrar los atributos
-     * @param string $region nombre de la region
+     * @param array $regions nombre de las regiones
      * @param null|\Iterator $filteredForms contenedor de los formularios que se van encontrando
      * @return \ArrayIterator
      */
-    private function filterForms($forms, $region,\Iterator $filteredForms = null)
+    private function filterForms($forms, $regions, \Iterator $filteredForms = null)
     {
         $filteredForms || $filteredForms = new \ArrayIterator();
 
         /** @var FormView $formView */
-        foreach($this->toArray($forms) as $formView){
-            if($this->isAttributeForm($formView) && $this->isAttributeInRegion($region, $formView)){
+        foreach ($this->toArray($forms) as $formView) {
+            if ($this->isAttributeForm($formView) && $this->isAttributeInRegions($regions, $formView)) {
                 $filteredForms->append($formView);
             }
 
-            $this->filterForms($formView->children, $region, $filteredForms);
+            $this->filterForms($formView->children, $regions, $filteredForms);
         }
 
         return $filteredForms;
@@ -73,12 +74,12 @@ class AttributeRegionFilter
     /**
      * Devuelve true si el atributo está definido en la región indicada.
      *
-     * @param $region
-     * @param $formView
+     * @param array $regions
+     * @param FormView $formView
      * @return bool
      */
-    private function isAttributeInRegion($region, $formView)
+    private function isAttributeInRegions($regions, $formView)
     {
-        return $formView->vars['_attribute_region_name'] === $region;
+        return in_array($formView->vars['_attribute_region_name'], $regions);
     }
 }
