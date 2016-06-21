@@ -25,9 +25,11 @@ class Configuration implements ConfigurationInterface
         // more information on that topic.
         $rootNode
             ->children()
-            ->arrayNode('bundles')
-            ->prototype('scalar')->end()
+                ->arrayNode('target_entities')
+                    ->prototype('scalar')->end()
+                ->end()
             ->end();
+
         return $treeBuilder;
     }
 }

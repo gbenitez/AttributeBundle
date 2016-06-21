@@ -349,10 +349,21 @@ gbenitez\Bundle\AttributeBundle\Entity\AttributeOwnerInterface
 - agregar al archivo app/config/config.yml :
 
 ```yaml
+# app/config/config.yml
 doctrine:
     # ...
     orm:
         # ...
         resolve_target_entities:
             gbenitez\Bundle\AttributeBundle\Entity\AttributeOwnerInterface: Acme\AppBundle\Entity\EntidadRelacion
+```
+
+#### Para definir targetEntity
+
+```yaml
+# app/config/config.yml
+attribute:
+    target_entities:
+        - 'Entity'
+        - 'AnotherEntity'
 ```

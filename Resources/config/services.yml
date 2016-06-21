@@ -33,7 +33,7 @@ services:
 
     attribute.form.type.target_entity:
         class: gbenitez\Bundle\AttributeBundle\Form\Type\Admin\TargetEntityType
-        arguments: [{Deal: Deal, Project: Project, Company: Company}]
+        arguments: [""]
         tags:
             - { name: "form.type" }
 

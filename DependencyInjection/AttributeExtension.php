@@ -24,5 +24,8 @@ class AttributeExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+
+        $container->findDefinition('attribute.form.type.target_entity')
+            ->replaceArgument(0, $config['target_entities']);
     }
 }
