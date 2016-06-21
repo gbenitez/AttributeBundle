@@ -60,6 +60,12 @@ class Attribute
     protected $configuration;
 
     /**
+     * @var string
+     * @ORM\Column(name="container_class", type="string", nullable=true)
+     */
+    protected $containerClass;
+
+    /**
      * @var boolean
      *
      * @ORM\Column(name="active", type="boolean")
@@ -394,4 +400,19 @@ class Attribute
         $this->region = $region;
     }
 
+    /**
+     * @return string
+     */
+    public function getContainerClass()
+    {
+        return $this->containerClass;
+    }
+
+    /**
+     * @param string $containerClass
+     */
+    public function setContainerClass($containerClass)
+    {
+        $this->containerClass = $containerClass;
+    }
 }

@@ -23,6 +23,7 @@ easy_admin:
                         type: 'entity'
                         type_options:
                             class: gbenitez\Bundle\AttributeBundle\Entity\Region
+                    - 'containerClass'
                     -
                         property: 'configuration'
                         type: 'gbenitez\Bundle\AttributeBundle\Form\Type\YamlType'
@@ -38,6 +39,10 @@ easy_admin:
                         type: 'textarea'
                         type_options:
                             attr: { 'data-ace': 'javascript' }
+                        help: >
+                            Permite escribir código javascript para añadir funcionalidad extra al atributo.
+                            <br>Funciones disponibles: getAttrField(ids) devuelve un objeto que es un atributo por su nombre
+                            <br>Variables disponibles: container, input, label
                     - 'active'
         Region:
             class: gbenitez\Bundle\AttributeBundle\Entity\Region

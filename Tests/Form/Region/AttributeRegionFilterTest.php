@@ -55,6 +55,10 @@ class AttributeRegionFilterTest extends PHPUnit_Framework_TestCase
         $forms = $this->filter->getAttributesByRegion($form, 'c');
         $this->assertCount(1, $forms);
         $this->assertSame([$f6], $forms);
+
+        $forms = $this->filter->getAttributesByRegion($form, ['a', 'b']);
+        $this->assertCount(5, $forms);
+        $this->assertSame([$f1, $f2, $f3, $f4, $f5], $forms);
     }
 
     /**

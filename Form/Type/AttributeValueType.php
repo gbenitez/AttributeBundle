@@ -77,6 +77,7 @@ class AttributeValueType extends AbstractType
             );
 
             $configuration['constraints'] = $this->createConstraintValidations($attribute);
+            $configuration['attr']['data-attribute-name'] = $attribute->getName();
 
             switch ($type) {
                 case AttributeTypes::TEXT:
@@ -147,6 +148,7 @@ class AttributeValueType extends AbstractType
     {
         $view->vars['_attribute'] = $options['attribute'];
         $view->vars['_attribute_region_name'] = $options['attribute']->getRegion()->getName();
+        $view->vars['container_class'] = $options['attribute']->getContainerClass();
     }
 
     protected function createConstraintValidations(Attribute $attribute)

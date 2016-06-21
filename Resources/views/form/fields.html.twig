@@ -5,17 +5,22 @@
 {%- endblock -%}
 
 {%- block attribute_value_row -%}
-    <div class="form-group{% if (not compound or force_error|default(false)) and not valid %} has-error{% endif %}"
-         id="{{ id }}_container">
-        {{- form_label(form) -}}
-        {{- form_widget(form) -}}
-        {{- form_errors(form) -}}
+    <div class="form-group attribute-form-row
+    {%- if (not compound or force_error|default(false)) and not valid %} has-error{%- endif -%}
+    {{- container_class ? ' '~container_class -}}
+    " id="{{- id }}_container">
+        {{- block('attribute_value_row_content') -}}
     </div>
 {%- endblock -%}
 
+{%- block attribute_value_row_content -%}
+    {{- form_label(form) -}}
+    {{- form_widget(form) -}}
+    {{- form_errors(form) -}}
+{%- endblock -%}
+
 {%- block attribute_value_widget -%}
-    {#{% dump attr %}#}
-    {{- form_widget(form.value, {"attr": attr|merge({'data-attribute-name': _attribute.name})}) -}}
+    {{- form_widget(form.value) -}}
     {{- block('attribute_value_javascript') -}}
 {%- endblock -%}
 
@@ -27,21 +32,14 @@
 {%- block attribute_value_javascript -%}
     {%- if _attribute.javascriptCode is not empty -%}
         <script>
-            (function (document) {
-                var container = document.querySelector('#{{ id }}_container');
-                var input = document.querySelector('#{{ form.value.vars.id }}');
-                var label = document.querySelector('[for="{{ form.value.vars.id }}"]');
-
-                function getAttrField(id) {
-                    return document.querySelector('[data-attribute-name="' + id + '"]');
-                }
+            jQuery(function ($) {
+                var $input = $('#{{ form.value.vars.id }}');
+                var $label = $('[for="{{ form.value.vars.id }}"]');
 
                 {{ include(template_from_string(_attribute.javascriptCode), {
                     'id': form.value.vars.id
                 }, false) }}
-
-                window.getAttrField = getAttrField;
-            })(document);
+            });
         </script>
     {%- endif -%}
 {%- endblock -%}
