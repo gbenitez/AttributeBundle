@@ -20,7 +20,7 @@ class AttributeRegionFilter
     public function getAttributesByRegion($forms, $regions)
     {
         $a = iterator_to_array($this->filterForms($forms, (array)$regions));
-        dump($regions, $a);
+
         return $a;
     }
 

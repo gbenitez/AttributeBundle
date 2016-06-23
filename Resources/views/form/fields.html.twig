@@ -6,7 +6,8 @@
 
 {%- block attribute_value_row -%}
     <div class="form-group attribute-form-row
-    {%- if (not compound or force_error|default(false)) and not valid %} has-error{%- endif -%}
+    {#-{%- if (not compound or force_error|default(false)) and not valid %} has-error{%- endif -%}-#}
+    {%- if not valid %} has-error{%- endif -%}
     {{- container_class ? ' '~container_class -}}
     " id="{{- id }}_container">
         {{- block('attribute_value_row_content') -}}

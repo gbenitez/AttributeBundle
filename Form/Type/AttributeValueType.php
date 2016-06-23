@@ -151,6 +151,15 @@ class AttributeValueType extends AbstractType
         $view->vars['container_class'] = $options['attribute']->getContainerClass();
     }
 
+    public function finishView(FormView $view, FormInterface $form, array $options)
+    {
+        if (!isset($view['value'])) {
+            return;
+        }
+
+        $view->vars['valid'] = $view['value']->vars['valid'];
+    }
+
     protected function createConstraintValidations(Attribute $attribute)
     {
         $constraints = [];
