@@ -14,31 +14,15 @@ class AttributeValuePrinter
      * @var \Twig_Environment
      */
     private $twig;
-    private $datetimeFormat;
-    private $arrayJoinSeparator;
-
-    private $validTemplates = [
-        'checkbox' => 'checkbox',
-        'choice' => 'choice',
-        'money' => 'number',
-        'number' => 'number',
-        'percent' => 'percent',
-        'entity' => 'entity',
-        'date' => 'datetime',
-        'datetime' => 'datetime',
-        'time' => 'datetime',
-    ];
 
     /**
      * AttributeValuePrinter constructor.
      * @param $datetimeFormat
      * @param $arrayJoinSeparator
      */
-    public function __construct(\Twig_Environment $twig, $datetimeFormat, $arrayJoinSeparator = ', ')
+    public function __construct(\Twig_Environment $twig)
     {
         $this->twig = $twig;
-        $this->datetimeFormat = $datetimeFormat;
-        $this->arrayJoinSeparator = $arrayJoinSeparator;
     }
 
     public function toString(AttributeValueInterface $attributeValue)
@@ -46,35 +30,21 @@ class AttributeValuePrinter
         $value = $attributeValue->getValue();
         $attribute = $attributeValue->getAttribute();
 
-        $template = $this->twig->resolveTemplate([
-            $this->resolveTemplate($attribute),
-            $this->getTwigTemplateName('text') //Si no existe el template especifico, usamo el por defecto
-        ]);
-
-        return $template->render([
-            'value' => $value,
-            'attribute' => $attribute,
-            'attribute_value' => $attributeValue,
-            'configuration' => $attribute->getConfiguration(),
-        ]);
-    }
-
-    /**
-     * @return string
-     */
-    private function resolveTemplate(Attribute $attribute)
-    {
-        $templateName = $attribute->getValueTemplate();
-
-        if (null === $templateName) {
-            if (isset($this->validTemplates[$attribute->getType()])) {
-                $templateName = $this->validTemplates[$attribute->getType()];
-            } else {
-                $templateName = 'text';
-            }
+        if (null === $attribute->getValueTemplate()) {
+            return $value;
         }
 
-        return $this->getTwigTemplateName($templateName);
+        try {
+            return $this->twig->createTemplate($attribute->getValueTemplate())->render([
+                'value' => $value,
+                'attribute' => $attribute,
+                'attribute_value' => $attributeValue,
+                'configuration' => $attribute->getConfiguration(),
+            ]);
+        } catch (\Twig_Error $e) {
+            // TODO: crear un log
+            return null;
+        }
     }
 
     /**

@@ -85,7 +85,7 @@ class Attribute
     private $position;
 
     /**
-     * @ORM\Column(name="value_template", type="string" , nullable=true)
+     * @ORM\Column(name="value_template", type="text" , nullable=true)
      */
     private $valueTemplate;
 

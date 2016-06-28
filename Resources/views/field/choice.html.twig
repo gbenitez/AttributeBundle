@@ -1,9 +1,0 @@
-{% if configuration.multiple is defined and configuration.multiple %}
-    {%- block multiple -%}
-        {{ value|join(', ') }}
-    {%- endblock -%}
-{% else %}
-    {%- block single -%}
-        {{ value }}
-    {%- endblock -%}
-{% endif %}

@@ -21,63 +21,57 @@ class AttributeValuePrinterTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->twig = $this->prophesize(Twig_Environment::class);
+        $this->twig = new Twig_Environment(new Twig_Loader_Array([]));
+        $this->twig->getExtension('core')->setDateFormat(self::DATE_FORMAT);
 
-        $this->twigTemplate = $this->prophesize(Twig_Template::class);
-        $this->twigTemplate->render(Argument::any())->shouldBeCalled();
+//        $this->twigTemplate = $this->prophesize(Twig_Template::class);
+//        $this->twigTemplate->render(Argument::any())->shouldBeCalled();
 
         $this->printer = new AttributeValuePrinter(
-            $this->twig->reveal(),
+            $this->twig,
             self::DATE_FORMAT,
             ', '
         );
     }
 
-    public function printScalarDataProvider()
+    public function dataProviderWithoutTemplate()
     {
         return [
-            [1, 'number', 'number', 'other'],
-            ['value', 'text', 'text', 'other'],
-            ['value', 'choice', 'choice', 'other'],
-            ['value', 'money', 'number', 'other'],
-            ['value', 'percent', 'percent', 'other'],
-            ['value', 'entity', 'entity', 'other'],
-            ['value', 'date', 'datetime', 'other'],
-            ['value', 'datetime', 'datetime', 'other'],
-            ['value', 'time', 'datetime', 'other'],
+            ['test'],
+            ['123'],
+            [new DateTime('now')],
+        ];
+    }
+
+    public function dataProviderWithTemplate()
+    {
+        return [
+            ['test', '{{ value }} value', 'test value'],
+            ['test', '{{ value|upper }}', 'TEST'],
+            ['123', '{{ value }}', '123'],
+            [$v = new DateTime('now'), '{{ value|date }}', $v->format(self::DATE_FORMAT)],
+            [$v = new DateTime('now'), '{{ value.format("Y") }}', $v->format('Y')],
         ];
     }
 
     /**
-     * @dataProvider printScalarDataProvider
+     * @dataProvider dataProviderWithoutTemplate
      */
-    public function testScalarValueWithoutTemplateValueSetted($value, $type, $template)
+    public function testScalarValueWithoutTemplateValueSetted($value)
     {
-        $attrValue = $this->createAttributeValueMock($value, $type);
-
-        $this->twig->resolveTemplate($this->createResolveTemplateArgument($template))
-            ->willReturn($this->twigTemplate->reveal())
-            ->shouldBeCalled();
-
-        $this->twigTemplate->render(Argument::any())->willReturn($value);
+        $attrValue = $this->createAttributeValueMock($value);
 
         $this->assertSame($value, $this->printer->toString($attrValue->reveal()));
     }
 
     /**
-     * @dataProvider printScalarDataProvider
+     * @dataProvider dataProviderWithTemplate
      */
-    public function testScalarValueWithTemplateValueSetted($value, $type, $template, $ownTemplate)
+    public function testScalarValueWithTemplateValueSetted($value, $template, $expected)
     {
-        $attrValue = $this->createAttributeValueMock($value, $type, $ownTemplate);
+        $attrValue = $this->createAttributeValueMock($value, $template);
 
-        $this->twig->resolveTemplate($this->createResolveTemplateArgument($ownTemplate))
-            ->willReturn($this->twigTemplate->reveal())
-            ->shouldBeCalled();
-
-        $this->twigTemplate->render(Argument::any())->willReturn($value);
-
-        $this->assertSame($value, $this->printer->toString($attrValue->reveal()));
+        $this->assertSame($expected, $this->printer->toString($attrValue->reveal()));
     }
 
     /**
@@ -85,10 +79,9 @@ class AttributeValuePrinterTest extends PHPUnit_Framework_TestCase
      * @param $templateName
      * @return AttributeValueInterface|\Prophecy\Prophecy\ObjectProphecy
      */
-    private function createAttributeValueMock($value, $type, $templateName = null, &$attr = null)
+    private function createAttributeValueMock($value, $templateName = null, &$attr = null)
     {
         $attr = $this->prophesize(Attribute::class);
-        $attr->getType()->willReturn($type);
         $attr->getValueTemplate()->willReturn($templateName);
         $attr->getConfiguration()->willReturn([]);
 
@@ -98,17 +91,5 @@ class AttributeValuePrinterTest extends PHPUnit_Framework_TestCase
         $attrValue->getAttribute()->willReturn($attr->reveal());
 
         return $attrValue;
-    }
-
-    /**
-     * @param $template
-     * @return array
-     */
-    private function createResolveTemplateArgument($template)
-    {
-        return [
-            '@Attribute/field/'.$template.'.html.twig',
-            '@Attribute/field/text.html.twig',
-        ];
     }
 }
