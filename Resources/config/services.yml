@@ -41,8 +41,24 @@ services:
         class: gbenitez\Bundle\AttributeBundle\Form\Region\AttributeRegionFilter
         autowire: true
 
+    attribute.resolver.attribute_region:
+        class: gbenitez\Bundle\AttributeBundle\Model\Region\AttributeRegionResolver
+        autowire: true
+
+
+    attribute.printer.attribute_value:
+        class: gbenitez\Bundle\AttributeBundle\Util\AttributeValuePrinter
+        autowire: true
+        arguments: ['@twig', 'd-m-Y']
+
     attribute.twig.extension.attribute:
         class: gbenitez\Bundle\AttributeBundle\Twig\Extension\AttributeExtension
         autowire: true
         tags:
             - { name: "twig.extension" }
+
+    attribute.form.type.template_name:
+        class: gbenitez\Bundle\AttributeBundle\Form\Type\Admin\TemplateNameType
+        arguments: ["@kernel"]
+        tags:
+            - { name: 'form.type' }

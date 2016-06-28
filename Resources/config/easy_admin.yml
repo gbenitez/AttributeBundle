@@ -17,6 +17,10 @@ easy_admin:
                         property: 'targetEntity'
                         type: 'gbenitez\Bundle\AttributeBundle\Form\Type\Admin\TargetEntityType'
                     - { property: 'type' }
+                    -
+                        property: 'value_template'
+                        type: 'gbenitez\Bundle\AttributeBundle\Form\Type\Admin\TemplateNameType'
+                        required: false
                     - { property: 'owner' }
                     -
                         property: 'region'

@@ -85,6 +85,11 @@ class Attribute
     private $position;
 
     /**
+     * @ORM\Column(name="value_template", type="string" , nullable=true)
+     */
+    private $valueTemplate;
+
+    /**
      * @ORM\Column(name="javascript_code", type="text" , nullable=true)
      */
     private $javascriptCode;
@@ -414,5 +419,21 @@ class Attribute
     public function setContainerClass($containerClass)
     {
         $this->containerClass = $containerClass;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getValueTemplate()
+    {
+        return $this->valueTemplate;
+    }
+
+    /**
+     * @param mixed $valueTemplate
+     */
+    public function setValueTemplate($valueTemplate)
+    {
+        $this->valueTemplate = $valueTemplate;
     }
 }

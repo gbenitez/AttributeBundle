@@ -56,6 +56,4 @@ abstract class AbstractAttributeValue implements AttributeValueInterface
     {
         $this->value = $value;
     }
-
-
 }
