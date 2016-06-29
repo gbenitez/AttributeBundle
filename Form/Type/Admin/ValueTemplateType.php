@@ -49,6 +49,23 @@ class ValueTemplateType extends AbstractType implements EventSubscriberInterface
     {
         $data = $event->getData();
 
+        $this->validateTwigSyntax($event, $data);
+        $this->addDefaultValueTemplate($event, $data);
+    }
+
+    public static function getSubscribedEvents()
+    {
+        return [
+            FormEvents::SUBMIT => 'onSubmit',
+        ];
+    }
+
+    /**
+     * @param FormEvent $event
+     * @param $data
+     */
+    private function validateTwigSyntax(FormEvent $event, $data)
+    {
         if (null === $data) {
             return;
         }
@@ -69,13 +86,16 @@ class ValueTemplateType extends AbstractType implements EventSubscriberInterface
         $this->twig->setLoader($realLoader);
     }
 
-    public function onPostSubmit(FormEvent $event)
+    /**
+     * @param FormEvent $event
+     * @param $data
+     */
+    private function addDefaultValueTemplate(FormEvent $event, $data)
     {
-        $data = $event->getData();
         $form = $event->getForm();
-        $object = $form->getRoot()->getData();
+        $object = $form->getParent()->getNormData();
 
-        if (!$form->isValid() || null !== $data || !($object instanceof Attribute)) {
+        if (($form->isSubmitted() and !$form->isValid()) || null != $data || !($object instanceof Attribute)) {
             return;
         }
 
@@ -85,18 +105,9 @@ class ValueTemplateType extends AbstractType implements EventSubscriberInterface
             DateType::class,
             DateTimeType::class,
         ];
-dump($object);die;
+
         if (in_array($object->getType(), $dateTypes)) {
-            $object->setValueTemplate('{{ value ? value|date }}');
+            $event->setData('{{ value ? value|date }}');
         }
-
-    }
-
-    public static function getSubscribedEvents()
-    {
-        return [
-            FormEvents::SUBMIT => 'onSubmit',
-            FormEvents::POST_SUBMIT => 'onPostSubmit',
-        ];
     }
 }

@@ -70,8 +70,8 @@ class AttributeExtension extends \Twig_Extension
             ->getByRegions($regions, $attributes);
     }
 
-    public function getAttributeValueAsString(AttributeValueInterface $value)
+    public function getAttributeValueAsString(AttributeValueInterface $value, $context = 'default')
     {
-        return $this->container->get('attribute.printer.attribute_value')->toString($value);
+        return $this->container->get('attribute.printer.attribute_value')->toString($value, $context);
     }
 }

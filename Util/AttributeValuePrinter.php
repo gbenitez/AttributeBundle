@@ -25,7 +25,7 @@ class AttributeValuePrinter
         $this->twig = $twig;
     }
 
-    public function toString(AttributeValueInterface $attributeValue)
+    public function toString(AttributeValueInterface $attributeValue, $context = 'default')
     {
         $value = $attributeValue->getValue();
         $attribute = $attributeValue->getAttribute();
@@ -40,6 +40,7 @@ class AttributeValuePrinter
                 'attribute' => $attribute,
                 'attribute_value' => $attributeValue,
                 'configuration' => $attribute->getConfiguration(),
+                'context' => $context,
             ]);
         } catch (\Twig_Error $e) {
             // TODO: crear un log
