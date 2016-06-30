@@ -37,7 +37,7 @@ class AttributeRegionResolverTest extends PHPUnit_Framework_TestCase
 
         $attributes = [$a, $b, $c];
 
-        $result = $this->resolver->getByRegions($regions, $attributes);
+        $result = $this->resolver->getValuesByRegions($regions, $attributes);
 
         $this->assertSame($result, [$a, $b]);
     }

@@ -4,6 +4,7 @@ namespace gbenitez\Bundle\AttributeBundle\Entity\Repository;
 
 
 use Doctrine\ORM\EntityRepository;
+use gbenitez\Bundle\AttributeBundle\Entity\Attribute;
 
 class AttributeRepository extends EntityRepository
 {

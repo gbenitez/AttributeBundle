@@ -62,3 +62,8 @@ services:
         arguments: ["@twig"]
         tags:
             - { name: 'form.type' }
+
+    attribute.extractor.attribute_value:
+        class: gbenitez\Bundle\AttributeBundle\Util\AttributeValueArrayExtractor
+        arguments: ["@attribute.printer.attribute_value"]
+        public: false

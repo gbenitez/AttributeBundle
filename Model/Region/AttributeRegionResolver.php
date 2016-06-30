@@ -2,6 +2,7 @@
 
 namespace gbenitez\Bundle\AttributeBundle\Model\Region;
 
+use gbenitez\Bundle\AttributeBundle\Entity\Attribute;
 use gbenitez\Bundle\AttributeBundle\Entity\AttributeValueInterface;
 
 /**
@@ -10,7 +11,38 @@ use gbenitez\Bundle\AttributeBundle\Entity\AttributeValueInterface;
 class AttributeRegionResolver
 {
 
+    /**
+     * Devuelve un arreglo de objetos Attribute que se encuentran
+     * definidos en las regiones indicadas.
+     *
+     * @param string|array $regions
+     * @param array|Attribute[] $attributes
+     * @return array|Attribute[]
+     */
     public function getByRegions($regions, $attributes)
+    {
+        $result = [];
+        $regions = (array)$regions;
+
+        /** @var Attribute $attr */
+        foreach ($attributes as $attr) {
+            if (in_array($attr->getRegion()->getName(), $regions)) {
+                $result[] = $attr;
+            }
+        }
+
+        return $result;
+    }
+
+    /**
+     * Devuelve un arreglo de objetos AttributeValueInterface que se encuentran
+     * definidos en las regiones indicadas.
+     *
+     * @param string|array $regions
+     * @param array|AttributeValueInterface[] $attributes
+     * @return array|AttributeValueInterface
+     */
+    public function getValuesByRegions($regions, $attributes)
     {
         $result = [];
         $regions = (array)$regions;

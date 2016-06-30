@@ -67,7 +67,7 @@ class AttributeExtension extends \Twig_Extension
     {
         return $this->container
             ->get('attribute.resolver.attribute_region')
-            ->getByRegions($regions, $attributes);
+            ->getValuesByRegions($regions, $attributes);
     }
 
     public function getAttributeValueAsString(AttributeValueInterface $value, $context = 'default')
