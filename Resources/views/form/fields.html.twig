@@ -32,15 +32,9 @@
 
 {%- block attribute_value_javascript -%}
     {%- if _attribute.javascriptCode is not empty -%}
-        <script>
-            jQuery(function ($) {
-                var $input = $('#{{ form.value.vars.id }}');
-                var $label = $('[for="{{ form.value.vars.id }}"]');
-
-                {{ include(template_from_string(_attribute.javascriptCode), {
-                    'id': form.value.vars.id
-                }, false) }}
-            });
-        </script>
+        {{ include('@Attribute/_attribute_javascript.html.twig', {
+            context: 'form',
+            attribute: _attribute,
+        }) }}
     {%- endif -%}
 {%- endblock -%}

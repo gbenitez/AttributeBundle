@@ -35,6 +35,8 @@ class Attribute
     /**
      * @var Region
      * @ORM\ManyToOne(targetEntity="Region", fetch="EAGER")
+     * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotBlank(message="Por favor, seleccione una región")
      */
     private $region;
 

@@ -46,7 +46,8 @@ class AttributeExtension extends \Twig_Extension
     {
         return [
             new \Twig_SimpleFilter('attribute_value', [$this, 'getAttributeValueAsString'], [
-                'is_safe' => ['html']
+                'is_safe' => ['html'],
+                'needs_environment' => true,
             ]),
         ];
     }
@@ -70,8 +71,31 @@ class AttributeExtension extends \Twig_Extension
             ->getValuesByRegions($regions, $attributes);
     }
 
-    public function getAttributeValueAsString(AttributeValueInterface $value, $context = 'default')
-    {
-        return $this->container->get('attribute.printer.attribute_value')->toString($value, $context);
+    public function getAttributeValueAsString(
+        \Twig_Environment $twig,
+        AttributeValueInterface $value,
+        $context = null,
+        $wrap = 'span',
+        $javascript = true
+    ) {
+        $content = $this->container->get('attribute.printer.attribute_value')->toString($value, $context);
+        $attribute = $value->getAttribute();
+
+        if (null != $wrap) {
+            $content = strtr('<{wrap} data-attribute-name="{name}">{content}</{wrap}>', [
+                '{wrap}' => $wrap,
+                '{name}' => $attribute->getName(),
+                '{content}' => $content,
+            ]);
+        }
+
+        if ($javascript && null != trim($attribute->getJavascriptCode())) {
+            $content .= $twig->render('@Attribute/_attribute_javascript.html.twig', [
+                'context' => $context,
+                'attribute' => $attribute,
+            ]);
+        }
+
+        return $content;
     }
 }
