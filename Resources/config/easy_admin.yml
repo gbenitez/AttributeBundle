@@ -28,6 +28,7 @@ easy_admin:
                             <br>Es posible usar las funciones y filtros definidos en
                             <a href="http://twig.sensiolabs.org/documentation" target="_blank">
                             http://twig.sensiolabs.org/documentation</a>
+                            <br>Variables disponibles: value, attribute, attribute_value, configuration, context
 
                     - { property: 'owner' }
                     -
@@ -53,9 +54,20 @@ easy_admin:
                             attr: { 'data-ace': 'javascript' }
                         help: >
                             Permite escribir código javascript para añadir funcionalidad extra al atributo.
-                            <br>Funciones disponibles: getAttrField(ids) devuelve un objeto que es un atributo por su nombre
-                            <br>Variables disponibles: container, input, label
-                    - 'active'
+                            Funciones disponibles:
+                            <ul>
+                            <li><b>$.attributeField(name)</b> devuelve el atributo por su nombre(campo de formulario o tag html),
+                            se pueden indicar varios nombres separados por coma</li>
+                            <li><b>$attributo.attributeContainer()</b> devuelve el contenedor del atributo
+                            (se puede pasar un selector para el contenedor)</li>
+                            </ul>
+                            Trabajando con contextos y acciones:<br/>
+                            Si necesitamos funcionalidades para cuando se visualiza el formulario y para
+                            cuando se visualizan los atributos.
+                            Podemos definir acciones javascript de la forma "{contexto}_action($attributo)".<br/>
+                            por ejemplo si el contexto es de formulario la funcion debe ser form_action($input),
+                            si el contexto es "show" la función será "show_action($element)".
+                    - { property: 'active', required: false }
         Region:
             class: gbenitez\Bundle\AttributeBundle\Entity\Region
             label: 'Regions [Attributes]'
