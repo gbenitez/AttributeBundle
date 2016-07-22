@@ -14,7 +14,7 @@ abstract class AbstractAttributeValue implements AttributeValueInterface
     /**
      * @var Attribute
      *
-     * @ORM\ManyToOne(targetEntity="gbenitez\Bundle\AttributeBundle\Entity\Attribute")
+     * @ORM\ManyToOne(targetEntity="gbenitez\Bundle\AttributeBundle\Entity\Attribute", fetch="EAGER")
      */
     protected $attribute;
 
