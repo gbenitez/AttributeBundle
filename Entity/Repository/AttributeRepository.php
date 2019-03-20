@@ -18,7 +18,7 @@ class AttributeRepository extends EntityRepository
         }
 
 
-        return $q;
+        return $q->getQuery()->getResult();
     }
 
     /**

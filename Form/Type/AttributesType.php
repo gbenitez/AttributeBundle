@@ -15,6 +15,11 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 class AttributesType extends AbstractType
 {
 
+    public function getBlockPrefix()
+    {
+        return 'attributes';
+    }
+
     public function getName()
     {
         return 'attributes';

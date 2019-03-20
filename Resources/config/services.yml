@@ -24,7 +24,7 @@ services:
     attribute.yaml:
         class: gbenitez\Bundle\AttributeBundle\Form\Type\YamlType
         tags:
-            - { name: form.type }
+            - { name: "form.type" }
 
     attribute.manager:
         class: gbenitez\Bundle\AttributeBundle\Model\AttributeManager
@@ -67,3 +67,5 @@ services:
         class: gbenitez\Bundle\AttributeBundle\Util\AttributeValueArrayExtractor
         arguments: ["@attribute.printer.attribute_value"]
         public: false
+
+

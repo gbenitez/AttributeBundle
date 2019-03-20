@@ -16,7 +16,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class AttributeAdminType extends AbstractType
 {
-
+    public function getBlockPrefix()
+    {
+        return 'attribute_admin_filter';
+    }
     /**
      * Returns the name of this type.
      *
@@ -54,7 +57,7 @@ class AttributeAdminType extends AbstractType
                 'expanded' => true
 
             ))
-            ->add('configuration', 'yaml', array(
+            ->add('configuration', YamlType::class , array(
                 'required' => false,
             ))
         ;
