@@ -8,13 +8,6 @@
 {% endblock %}
 {% block content %}
 
-    {% embed '@Attribute/box_filter.html.twig' with {
-    form: form_filter,
-    clear_path: path('attributes_list'),
-    container_class: 'col-sm-3',
-    } %}
-    {% endembed %}
-
     <div class="table-responsive">
         <table class="table">
             <thead>
