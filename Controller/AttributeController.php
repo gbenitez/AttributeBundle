@@ -17,13 +17,11 @@ class AttributeController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $formFilter = $this->createForm(new AttributeFilterType())->handleRequest($request);
 
-        $attributes = $this->get('attribute.repository')->getQueryAll($formFilter->getData());
+        $attributes = $this->get('attribute.repository')->getQueryAll();
 
-        return $this->render('AttributeBundle:admin:list.html.twig', array(
+        return $this->render('@Attribute/admin/list.html.twig', array(
             'attributes' => $attributes,
-            'form_filter' => $formFilter->createView(),
         ));
     }
     /**
@@ -44,7 +42,7 @@ class AttributeController extends Controller
             return $this->redirectToRoute('attributes_list');
         }
 
-        return $this->render('AttributeBundle:admin:create.html.twig', array(
+        return $this->render('@Attribute/admin/create.html.twig', array(
             'form' => $form->createView(),
         ));
     }
@@ -66,7 +64,7 @@ class AttributeController extends Controller
             return $this->redirectToRoute('attributes_list');
         }
 
-        return $this->render('AttributeBundle:admin:edit.html.twig', array(
+        return $this->render('@Attribute/admin/edit.html.twig', array(
             'form' => $form->createView(),
             'attribute' => $attribute,
         ));
