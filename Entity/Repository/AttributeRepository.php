@@ -8,7 +8,7 @@ use gbenitez\Bundle\AttributeBundle\Entity\Attribute;
 
 class AttributeRepository extends EntityRepository
 {
-    public function getQueryAll(array $filters = array())
+    public function getQueryAll($filters = array())
     {
         $q = $this->createQueryBuilder('attribute');
 

@@ -17,7 +17,7 @@ class AttributeController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $formFilter = $this->createForm(new AttributeFilterType(), array())->handleRequest($request);
+        $formFilter = $this->createForm(new AttributeFilterType())->handleRequest($request);
 
         $attributes = $this->get('attribute.repository')->getQueryAll($formFilter->getData());
 
