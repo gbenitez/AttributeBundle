@@ -62,7 +62,7 @@ class AttributeController extends Controller
      */
     public function editAction(Request $request, Attribute $attribute)
     {
-        $form = $this->createProfileForm($attribute = new Attribute());
+        $form = $this->createProfileForm($attribute);
         $form->handleRequest($request);
 
 
