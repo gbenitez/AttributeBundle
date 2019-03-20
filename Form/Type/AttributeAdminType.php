@@ -8,15 +8,22 @@
 
 namespace gbenitez\Bundle\AttributeBundle\Form\Type;
 
+use Doctrine\ORM\EntityRepository;
+use gbenitez\Bundle\AttributeBundle\Entity\Region;
 use gbenitez\Bundle\AttributeBundle\Model\AttributeTypes;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Tests\Fixtures\Entity;
 
 
 class AttributeAdminType extends AbstractType
 {
-
+    public function getBlockPrefix()
+    {
+        return 'attribute_admin_filter';
+    }
     /**
      * Returns the name of this type.
      *
@@ -54,9 +61,22 @@ class AttributeAdminType extends AbstractType
                 'expanded' => true
 
             ))
-            ->add('configuration', 'yaml', array(
+            ->add('configuration', YamlType::class , array(
                 'required' => false,
             ))
+            ->add('region', EntityType::class, array(
+                'label' => 'Region:',
+                'class' => Region::class,
+                'choice_label' => 'name',
+                'placeholder' => 'Seleccione',
+                'required' => true,
+                'invalid_message' => 'Debe seleccionar un fabricante',
+                'query_builder' => function(EntityRepository $er) {
+                    return $er->createQueryBuilder('r')
+                        ->where('r.active = 1');
+                }
+            ))
+
         ;
 
     }

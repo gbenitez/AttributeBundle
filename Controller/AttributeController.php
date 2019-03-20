@@ -19,12 +19,10 @@ class AttributeController extends Controller
     {
         $formFilter = $this->createForm(new AttributeFilterType(), array())->handleRequest($request);
 
-        $query = $this->get('attribute.repository')->getQueryAll($formFilter->getData());
-
-        $items = $this->get('knp_paginator')->paginate($query, $request->get('page', 1));
+        $attributes = $this->get('attribute.repository')->getQueryAll($formFilter->getData());
 
         return $this->render('AttributeBundle:admin:list.html.twig', array(
-            'pagination' => $items,
+            'attributes' => $attributes,
             'form_filter' => $formFilter->createView(),
         ));
     }

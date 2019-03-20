@@ -13,6 +13,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class YamlType extends AbstractType
 {
 
+    public function getBlockPrefix()
+    {
+        return 'yaml';
+    }
+    
     public function getName()
     {
         return 'yaml';

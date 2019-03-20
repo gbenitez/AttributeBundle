@@ -15,7 +15,6 @@
     } %}
     {% endembed %}
 
-    {{ knp_pagination_render(pagination) }}
     <div class="table-responsive">
         <table class="table">
             <thead>
@@ -30,7 +29,7 @@
             </tr>
             </thead>
             <tbody>
-            {% for item in pagination %}
+            {% for item in attributes %}
                 <tr>
                     <td>{{ item.id }}</td>
                     <td>{{ item.name }}</td>

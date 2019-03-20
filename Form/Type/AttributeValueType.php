@@ -53,6 +53,10 @@ class AttributeValueType extends AbstractType
         $this->translator = $translator;
     }
 
+    public function getBlockPrefix()
+    {
+        return 'attribute_value';
+    }
     public function getName()
     {
         return 'attribute_value';

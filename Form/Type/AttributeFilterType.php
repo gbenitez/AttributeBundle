@@ -15,6 +15,10 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class AttributeFilterType extends AbstractType
 {
+    public function getBlockPrefix()
+    {
+        return 'attribute_filter';
+    }
 
     /**
      * Returns the name of this type.
