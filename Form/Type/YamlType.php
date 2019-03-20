@@ -4,6 +4,7 @@ namespace gbenitez\Bundle\AttributeBundle\Form\Type;
 
 use gbenitez\Bundle\AttributeBundle\Form\DataTransformer\ArrayToYamlTransformer;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -25,7 +26,7 @@ class YamlType extends AbstractType
 
     public function getParent()
     {
-        return 'textarea';
+        return TextareaType::class;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
