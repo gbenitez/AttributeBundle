@@ -1,5 +1,6 @@
 {
   "name": "gbenitez/attribute-bundle",
+  "version": "2.0",
   "type": "symfony-bundle",
   "description": "Symfony Attribute Bundle para Form",
   "keywords": ["form", "attribute", "bundle"],
