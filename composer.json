@@ -1,11 +1,11 @@
 {
   "name": "gbenitez/attribute-bundle",
   "type": "symfony-bundle",
-  "description": "Symfony Attribute Bundle para formularios",
+  "description": "Symfony Attribute Bundle para Form",
   "keywords": ["form", "attribute", "bundle"],
   "require": {
-    "php": ">=5.5.0",
-    "symfony/framework-bundle": "^2.5||^3.0||^4.0"
+    "php": ">=8.1",
+    "symfony/framework-bundle": "^2.5||^3.0||^4.0||6.1.*"
   },
   "autoload": {
     "psr-4": {"gbenitez\\Bundle\\AttributeBundle\\": ""}
@@ -14,5 +14,8 @@
     "branch-alias": {
       "dev-master": "2.0-dev"
     }
+  },
+  "require-dev": {
+    "symfony/phpunit-bridge": "^6.1"
   }
 }
