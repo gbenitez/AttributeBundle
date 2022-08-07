@@ -2,7 +2,7 @@
   "name": "gbenitez/attribute-bundle",
   "version": "2.0",
   "type": "symfony-bundle",
-  "description": "Symfony Attribute Bundle para Form",
+  "description": "Symfony Attribute Bundle para Forma",
   "keywords": ["form", "attribute", "bundle"],
   "require": {
     "php": ">=8.1",
