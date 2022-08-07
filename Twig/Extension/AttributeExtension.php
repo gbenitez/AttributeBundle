@@ -3,7 +3,7 @@
 namespace gbenitez\Bundle\AttributeBundle\Twig\Extension;
 
 use gbenitez\Bundle\AttributeBundle\Entity\AttributeValueInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
+use gbenitez\Bundle\AttributeBundle\Util\AttributeValuePrinter;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
@@ -14,22 +14,23 @@ use Twig\TwigTest;
  */
 class AttributeExtension extends AbstractExtension
 {
-    /**
-     * @var AttributeValueInterface
-     */
-    private $value;
 
-    /** @var \Twig\Environment */
-    private $twig;
+    private AttributeValueInterface $attributeValueInterface;
+
+    private \Twig\Environment $twig;
+
+    private AttributeValuePrinter $printer;
 
     /**
-     * AttributeExtension constructor.
-     * @param ContainerInterface $container
+     * @param AttributeValueInterface $attributeValueInterface
+     * @param \Twig\Environment $twig
+     * @param AttributeValuePrinter $printer
      */
-    public function __construct(AttributeValueInterface $attributeValueInterface, \Twig\Environment $twig)
+    public function __construct(AttributeValueInterface $attributeValueInterface, \Twig\Environment $twig, AttributeValuePrinter $printer)
     {
-        $this->value = $attributeValueInterface;
+        $this->attributeValueInterface = $attributeValueInterface;
         $this->twig = $twig;
+        $this->printer = $printer;
     }
 
     /**
@@ -62,9 +63,9 @@ class AttributeExtension extends AbstractExtension
 
     public function filterFormAttributesByRegion($forms, $region)
     {
-        return $this->container
+        /*return $this->container
             ->get('attribute.form.filter.attribute_region')
-            ->getAttributesByRegion($forms, $region);
+            ->getAttributesByRegion($forms, $region);*/
     }
 
     /**
@@ -74,9 +75,9 @@ class AttributeExtension extends AbstractExtension
      */
     public function getAttributesByRegion($regions, $attributes)
     {
-        return $this->container
+        /*return $this->container
             ->get('attribute.resolver.attribute_region')
-            ->getValuesByRegions($regions, $attributes);
+            ->getValuesByRegions($regions, $attributes);*/
     }
 
     public function getAttributeValueAsString(
@@ -84,8 +85,8 @@ class AttributeExtension extends AbstractExtension
         $wrap = 'span',
         $javascript = true
     ) {
-        $content = $this->container->get('attribute.printer.attribute_value')->toString($this->value, $context);
-        $attribute = $this->value->getAttribute();
+        $content = $this->printer->toString($this->attributeValueInterface, $context);
+        $attribute = $this->attributeValueInterface->getAttribute();
 
         if (null != $wrap) {
             $content = strtr('<{wrap} data-attribute-name="{name}">{content}</{wrap}>', [

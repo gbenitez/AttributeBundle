@@ -3,6 +3,7 @@
 namespace gbenitez\Bundle\AttributeBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use gbenitez\Bundle\AttributeBundle\Entity\Attribute;
 
 /**
  * @author Manuel Aguirre <programador.manuel@gmail.com>
@@ -14,7 +15,7 @@ abstract class AbstractAttributeValue implements AttributeValueInterface
     /**
      * @var Attribute
      *
-     * @ORM\ManyToOne(targetEntity="gbenitez\Bundle\AttributeBundle\Entity\Attribute", fetch="EAGER")
+     * @ORM\ManyToOne(targetEntity="Attribute", fetch="EAGER")
      */
     protected $attribute;
 

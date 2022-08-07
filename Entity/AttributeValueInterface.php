@@ -2,6 +2,8 @@
 
 namespace gbenitez\Bundle\AttributeBundle\Entity;
 
+use gbenitez\Bundle\AttributeBundle\Entity\Attribute;
+
 /**
  * @author Manuel Aguirre <programador.manuel@gmail.com>
  */

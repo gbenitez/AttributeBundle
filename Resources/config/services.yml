@@ -51,9 +51,19 @@ services:
         autowire: true
         arguments: ['@twig', 'd-m-Y']
 
+    attribute.entity.abstract_attributeValue:
+        class: gbenitez\Bundle\AttributeBundle\Entity\AbstractAttributeValue
+        abstract: true
+
+    attribute.entity.attribute_value_interface:
+        class: gbenitez\Bundle\AttributeBundle\Entity\AttributeValueInterface
+
     attribute.twig.extension.attribute:
         class: gbenitez\Bundle\AttributeBundle\Twig\Extension\AttributeExtension
-        autowire: true
+        arguments:
+            - '@attribute.entity.attribute_value_interface'
+            - '@twig'
+            - '@attribute.printer.attribute_value'
         tags:
             - { name: "twig.extension" }
 
@@ -67,5 +77,6 @@ services:
         class: gbenitez\Bundle\AttributeBundle\Util\AttributeValueArrayExtractor
         arguments: ["@attribute.printer.attribute_value"]
         public: false
+
 
 
