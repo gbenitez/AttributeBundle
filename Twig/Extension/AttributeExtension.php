@@ -4,24 +4,32 @@ namespace gbenitez\Bundle\AttributeBundle\Twig\Extension;
 
 use gbenitez\Bundle\AttributeBundle\Entity\AttributeValueInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFilter;
+use Twig\TwigFunction;
+use Twig\TwigTest;
 
 /**
  * @author Manuel Aguirre <programador.manuel@gmail.com>
  */
-class AttributeExtension extends \Twig_Extension
+class AttributeExtension extends AbstractExtension
 {
     /**
-     * @var ContainerInterface
+     * @var AttributeValueInterface
      */
-    private $container;
+    private $value;
+
+    /** @var \Twig\Environment */
+    private $twig;
 
     /**
      * AttributeExtension constructor.
      * @param ContainerInterface $container
      */
-    public function __construct(ContainerInterface $container)
+    public function __construct(AttributeValueInterface $attributeValueInterface, \Twig\Environment $twig)
     {
-        $this->container = $container;
+        $this->value = $attributeValueInterface;
+        $this->twig = $twig;
     }
 
     /**
@@ -37,15 +45,15 @@ class AttributeExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('form_attributes', [$this, 'filterFormAttributesByRegion']),
-            new \Twig_SimpleFunction('attributes_by_region', [$this, 'getAttributesByRegion']),
+            new TwigFunction('form_attributes', [$this, 'filterFormAttributesByRegion']),
+            new TwigFunction('attributes_by_region', [$this, 'getAttributesByRegion']),
         ];
     }
 
     public function getFilters()
     {
         return [
-            new \Twig_SimpleFilter('attribute_value', [$this, 'getAttributeValueAsString'], [
+            new TwigFilter('attribute_value', [$this, 'getAttributeValueAsString'], [
                 'is_safe' => ['html'],
                 'needs_environment' => true,
             ]),
@@ -72,14 +80,12 @@ class AttributeExtension extends \Twig_Extension
     }
 
     public function getAttributeValueAsString(
-        \Twig_Environment $twig,
-        AttributeValueInterface $value,
         $context = null,
         $wrap = 'span',
         $javascript = true
     ) {
-        $content = $this->container->get('attribute.printer.attribute_value')->toString($value, $context);
-        $attribute = $value->getAttribute();
+        $content = $this->container->get('attribute.printer.attribute_value')->toString($this->value, $context);
+        $attribute = $this->value->getAttribute();
 
         if (null != $wrap) {
             $content = strtr('<{wrap} data-attribute-name="{name}">{content}</{wrap}>', [
@@ -90,7 +96,7 @@ class AttributeExtension extends \Twig_Extension
         }
 
         if ($javascript && null != trim($attribute->getJavascriptCode())) {
-            $content .= $twig->render('@Attribute/_attribute_javascript.html.twig', [
+            $content .= $this->twig->render('@Attribute/_attribute_javascript.html.twig', [
                 'context' => $context,
                 'attribute' => $attribute,
             ]);
