@@ -4,26 +4,15 @@ namespace gbenitez\Bundle\AttributeBundle\Util;
 
 use gbenitez\Bundle\AttributeBundle\Entity\Attribute;
 use gbenitez\Bundle\AttributeBundle\Entity\AttributeValueInterface;
+use Twig\Twig_Error;
 
 /**
  * @author Manuel Aguirre <programador.manuel@gmail.com>
  */
 class AttributeValuePrinter
 {
-    /**
-     * @var \Twig_Environment
-     */
-    private $twig;
 
-    /**
-     * AttributeValuePrinter constructor.
-     * @param $datetimeFormat
-     * @param $arrayJoinSeparator
-     */
-    public function __construct(\Twig\Environment $twig)
-    {
-        $this->twig = $twig;
-    }
+
 
     public function toString(AttributeValueInterface $attributeValue, $context = null)
     {
@@ -42,7 +31,7 @@ class AttributeValuePrinter
                 'configuration' => $attribute->getConfiguration(),
                 'context' => $context ? $context : 'default',
             ]);
-        } catch (\Twig_Error $e) {
+        } catch (Twig\Twig_Error $e) {
             // TODO: crear un log
             return null;
         }

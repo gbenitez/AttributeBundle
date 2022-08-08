@@ -3,6 +3,8 @@
 namespace gbenitez\Bundle\AttributeBundle\Twig\Extension;
 
 use gbenitez\Bundle\AttributeBundle\Entity\AttributeValueInterface;
+use gbenitez\Bundle\AttributeBundle\Form\Region\AttributeRegionFilter;
+use gbenitez\Bundle\AttributeBundle\Model\Region\AttributeRegionResolver;
 use gbenitez\Bundle\AttributeBundle\Util\AttributeValuePrinter;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
@@ -14,23 +16,22 @@ use Twig\TwigTest;
  */
 class AttributeExtension extends AbstractExtension
 {
-
-    private AttributeValueInterface $attributeValueInterface;
-
-    private \Twig\Environment $twig;
-
     private AttributeValuePrinter $printer;
+    private AttributeRegionResolver $regionResolver;
+    private AttributeRegionFilter $regionFilter;
 
     /**
-     * @param AttributeValueInterface $attributeValueInterface
-     * @param \Twig\Environment $twig
+     * AttributeExtension constructor.
      * @param AttributeValuePrinter $printer
+     * @param AttributeRegionFilter $regionFilter
+     * @param AttributeRegionResolver $regionResolver
      */
-    public function __construct(AttributeValueInterface $attributeValueInterface, \Twig\Environment $twig, AttributeValuePrinter $printer)
+    public function __construct(AttributeValuePrinter $printer,AttributeRegionFilter $regionFilter, AttributeRegionResolver $regionResolver)
     {
-        $this->attributeValueInterface = $attributeValueInterface;
-        $this->twig = $twig;
+
         $this->printer = $printer;
+        $this->regionResolver = $regionResolver;
+        $this->regionFilter = $regionFilter;
     }
 
     /**
@@ -63,9 +64,7 @@ class AttributeExtension extends AbstractExtension
 
     public function filterFormAttributesByRegion($forms, $region)
     {
-        /*return $this->container
-            ->get('attribute.form.filter.attribute_region')
-            ->getAttributesByRegion($forms, $region);*/
+        return $this->regionFilter->getAttributesByRegion($forms, $region);
     }
 
     /**
@@ -75,18 +74,18 @@ class AttributeExtension extends AbstractExtension
      */
     public function getAttributesByRegion($regions, $attributes)
     {
-        /*return $this->container
-            ->get('attribute.resolver.attribute_region')
-            ->getValuesByRegions($regions, $attributes);*/
+        return $this->regionResolver->getValuesByRegions($regions, $attributes);
     }
 
     public function getAttributeValueAsString(
+        \Twig\Environment $twig,
+        AttributeValueInterface $value,
         $context = null,
         $wrap = 'span',
         $javascript = true
     ) {
-        $content = $this->printer->toString($this->attributeValueInterface, $context);
-        $attribute = $this->attributeValueInterface->getAttribute();
+        $content = $this->printer->toString($value, $context);
+        $attribute = $value->getAttribute();
 
         if (null != $wrap) {
             $content = strtr('<{wrap} data-attribute-name="{name}">{content}</{wrap}>', [
@@ -97,7 +96,7 @@ class AttributeExtension extends AbstractExtension
         }
 
         if ($javascript && null != trim($attribute->getJavascriptCode())) {
-            $content .= $this->twig->render('@Attribute/_attribute_javascript.html.twig', [
+            $content .= $twig->render('@Attribute/_attribute_javascript.html.twig', [
                 'context' => $context,
                 'attribute' => $attribute,
             ]);

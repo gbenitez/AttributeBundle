@@ -1,7 +1,7 @@
 services:
-#    attribute.example:
-#        class: AttributeBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+    #    attribute.example:
+    #        class: AttributeBundle\Example
+    #        arguments: [@service_id, "plain_value", %parameter%]
     attribute.attribute_value:
         class: gbenitez\Bundle\AttributeBundle\Form\Type\AttributeValueType
         arguments:
@@ -24,7 +24,7 @@ services:
     attribute.yaml:
         class: gbenitez\Bundle\AttributeBundle\Form\Type\YamlType
         tags:
-            - { name: "form.type" }
+            - { name: form.type }
 
     attribute.manager:
         class: gbenitez\Bundle\AttributeBundle\Model\AttributeManager
@@ -37,33 +37,31 @@ services:
         tags:
             - { name: "form.type" }
 
-    attribute.form.filter.attribute_region:
-        class: gbenitez\Bundle\AttributeBundle\Form\Region\AttributeRegionFilter
-        autowire: true
+    gbenitez\Bundle\AttributeBundle\Form\Region\AttributeRegionFilter: ~
+        #class: gbenitez\Bundle\AttributeBundle\Form\Region\AttributeRegionFilter
+        #autowire: true
 
-    attribute.resolver.attribute_region:
-        class: gbenitez\Bundle\AttributeBundle\Model\Region\AttributeRegionResolver
-        autowire: true
+    gbenitez\Bundle\AttributeBundle\Model\Region\AttributeRegionResolver: ~
+        #class: gbenitez\Bundle\AttributeBundle\Model\Region\AttributeRegionResolver
+        #autowire: true
 
 
-    attribute.printer.attribute_value:
-        class: gbenitez\Bundle\AttributeBundle\Util\AttributeValuePrinter
-        autowire: true
-        arguments: ['@twig', 'd-m-Y']
+    gbenitez\Bundle\AttributeBundle\Util\AttributeValuePrinter: ~
+        #class: gbenitez\Bundle\AttributeBundle\Util\AttributeValuePrinter
+        #autowire: true
+        #arguments: ['@twig', 'd-m-Y']
 
-    attribute.entity.abstract_attributeValue:
-        class: gbenitez\Bundle\AttributeBundle\Entity\AbstractAttributeValue
-        abstract: true
 
-    attribute.entity.attribute_value_interface:
-        class: gbenitez\Bundle\AttributeBundle\Entity\AttributeValueInterface
+    #gbenitez\Bundle\AttributeBundle\Entity\AbstractAttributeValue: ~
+
+    #gbenitez\Bundle\AttributeBundle\Entity\AttributeValueInterface: '@gbenitez\Bundle\AttributeBundle\Entity\AbstractAttributeValue'
+    #App\Entity\TargetEntity: ~
+
+    #gbenitez\Bundle\AttributeBundle\Entity\AttributeValueInterface: '@App\Entity\TargetEntity'
 
     attribute.twig.extension.attribute:
         class: gbenitez\Bundle\AttributeBundle\Twig\Extension\AttributeExtension
-        arguments:
-            - '@attribute.entity.attribute_value_interface'
-            - '@twig'
-            - '@attribute.printer.attribute_value'
+        autowire: true
         tags:
             - { name: "twig.extension" }
 
@@ -75,8 +73,5 @@ services:
 
     attribute.extractor.attribute_value:
         class: gbenitez\Bundle\AttributeBundle\Util\AttributeValueArrayExtractor
-        arguments: ["@attribute.printer.attribute_value"]
+        autowire: true
         public: false
-
-
-
