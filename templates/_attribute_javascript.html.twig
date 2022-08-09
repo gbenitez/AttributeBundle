@@ -1,0 +1,20 @@
+<script>
+    jQuery(function ($) {
+        {% if form is defined and context == 'form' -%}
+        var $input = $('#{{ form.value.vars.id }}');
+        var $label = $('[for="{{ form.value.vars.id }}"]');
+        {% endif %}
+
+        {{ include(template_from_string(attribute.javascriptCode), [], false) }}
+
+        {% if context is not empty -%}
+        if (typeof {{ context }}_action == 'function') {
+            {% if context == 'form' -%}
+            {{ context }}_action($input);
+            {% else -%}
+            {{ context }}_action($.attributeField('{{ attribute.name }}'));
+            {% endif -%}
+        }
+        {% endif -%}
+    });
+</script>

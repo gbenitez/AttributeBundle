@@ -1,4 +1,4 @@
-#### Documentación Attributes 
+#### Documentación Attributes
 
 Agregar al composer.json:
 
@@ -342,7 +342,7 @@ class: AppBundle\Entity\Country
 
 #### Para definir la relación con el Owner de un Attribute
 
-- Implementar en la entidad relación la interface:  
+- Implementar en la entidad relación la interface:
 
 gbenitez\Bundle\AttributeBundle\Entity\AttributeOwnerInterface
 
