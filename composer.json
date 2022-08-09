@@ -6,7 +6,8 @@
   "keywords": ["form", "attribute", "bundle"],
   "require": {
     "php": ">=8.1",
-    "symfony/framework-bundle": "^2.5||^3.0||^4.0||6.1.*"
+    "symfony/framework-bundle": "^2.5||^3.0||^4.0||6.1.*",
+    "symfony/config": "^6.1"
   },
   "autoload": {
     "psr-4": {
