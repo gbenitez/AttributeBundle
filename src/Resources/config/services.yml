@@ -8,7 +8,7 @@ services:
     attribute.attribute_value:
         class: gbenitez\Bundle\AttributeBundle\Form\Type\AttributeValueType
         arguments:
-            - "@=service('doctrine.orm.entity_manager').getRepository('AttributeBundle:Attribute')"
+            - "@=service('doctrine.orm.entity_manager').getRepository('GbenitezAttributeBundle:Attribute')"
             - "@doctrine.orm.entity_manager"
             - "@translator"
         tags:
