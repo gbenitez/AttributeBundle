@@ -1,0 +1,3 @@
+gbenitez_attribute:
+    path:           /admin/attributes/list
+    defaults:       { _controller:  gbenitez\Bundle\AttributeBundle\Controller\AttributeController::listAction }

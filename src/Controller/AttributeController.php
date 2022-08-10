@@ -8,34 +8,42 @@ use gbenitez\Bundle\AttributeBundle\Entity\Region;
 use gbenitez\Bundle\AttributeBundle\Entity\Repository\AttributeRepository;
 use gbenitez\Bundle\AttributeBundle\Form\Type\YamlType;
 use gbenitez\Bundle\AttributeBundle\Model\AttributeTypes;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-
+use \Symfony\Component\HttpFoundation\Response;
 
 class AttributeController extends AbstractController
 {
-    /**
-     * @Route("/list", name="attributes_list")
-     */
-    public function index(Request $request, AttributeRepository $attributeRepository)
-    {
+    /** @var AttributeRepository  */
+    public AttributeRepository $attributeRepository;
 
-        $attributes = $attributeRepository->getQueryAll();
+    /**
+     * CaptchaController constructor.
+     *
+     * @param AttributeRepository $attributeRepository
+     */
+    public function __construct(AttributeRepository $attributeRepository)
+    {
+        $this->attributeRepository = $attributeRepository;
+    }
+
+
+    public function listAction(): Response
+    {
+        $attributes = $this->attributeRepository->getQueryAll();
 
         return $this->render('@Attribute/admin/list.html.twig', array(
             'attributes' => $attributes,
         ));
     }
 
-    /**
-     * @Route("/create", name="attribute_create")
-     *
-     */
-    public function createAction(Request $request)
+
+    /*public function createAction(Request $request)
     {
         $form = $this->createProfileForm($attribute = new Attribute());
         $form->handleRequest($request);
@@ -53,13 +61,10 @@ class AttributeController extends AbstractController
         return $this->render('@Attribute/admin/create.html.twig', array(
             'form' => $form->createView(),
         ));
-    }
+    }*/
 
-    /**
-     * @Route("/edit/{id}", name="attribute_edit")
-     *
-     */
-    public function editAction(Request $request, Attribute $attribute)
+
+    /*public function editAction(Request $request, Attribute $attribute)
     {
         $form = $this->createProfileForm($attribute);
         $form->handleRequest($request);
@@ -78,9 +83,9 @@ class AttributeController extends AbstractController
             'form' => $form->createView(),
             'attribute' => $attribute,
         ));
-    }
+    }*/
 
-    protected function createProfileForm(Attribute $attribute)
+    /*protected function createProfileForm(Attribute $attribute)
     {
 
         $builder = $this->createFormBuilder($attribute)
@@ -126,6 +131,6 @@ class AttributeController extends AbstractController
             ));
 
         return $builder->getForm();
-    }
+    }*/
 
 }
