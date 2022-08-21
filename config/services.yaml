@@ -16,7 +16,7 @@ services:
     Gbenitez\AttributeBundle\Controller\AttributeController:
         class: '%benitez_attribute.controller.class%'
         arguments:
-          - '@attribute.repository'
+          - Gbenitez\AttributeBundle\Entity\AttributeRepository
 
     attribute.attribute_value:
         class: Gbenitez\AttributeBundle\Form\Type\AttributeValueType
