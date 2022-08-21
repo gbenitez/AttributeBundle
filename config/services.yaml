@@ -15,6 +15,7 @@ services:
 
     Gbenitez\AttributeBundle\Controller\AttributeController:
         class: '%benitez_attribute.controller.class%'
+        public: true
         arguments:
           - Gbenitez\AttributeBundle\Entity\AttributeRepository
 
