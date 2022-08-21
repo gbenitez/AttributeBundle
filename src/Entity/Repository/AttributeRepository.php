@@ -3,10 +3,10 @@
 namespace Gbenitez\Bundle\AttributeBundle\Entity\Repository;
 
 
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Gbenitez\Bundle\AttributeBundle\Entity\Attribute;
+use Gbenitez\AttributeBundle\Entity\Attribute;
 
 class AttributeRepository extends ServiceEntityRepository
 {

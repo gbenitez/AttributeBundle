@@ -1,8 +1,8 @@
 <?php
 
-namespace Gbenitez\Bundle\AttributeBundle\Form\Type;
+namespace Gbenitez\AttributeBundle\Form\Type;
 
-use Gbenitez\Bundle\AttributeBundle\Entity\AttributeValueInterface;
+use Gbenitez\AttributeBundle\Entity\AttributeValueInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;

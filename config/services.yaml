@@ -1,25 +1,25 @@
 parameters:
-    benitez_attribute.controller.class: Gbenitez\Bundle\AttributeBundle\Controller\AttributeController
-    benitez_attribute.attribute_repository.class: Gbenitez\Bundle\AttributeBundle\Entity\Repository\AttributeRepository
-    benitez_attribute.attribute_entity.class: Gbenitez\Bundle\AttributeBundle\Entity\Attribute
+    benitez_attribute.controller.class: Gbenitez\AttributeBundle\Controller\AttributeController
+    benitez_attribute.attribute_repository.class: Gbenitez\AttributeBundle\Entity\Repository\AttributeRepository
+    benitez_attribute.attribute_entity.class: Gbenitez\AttributeBundle\Entity\Attribute
 
 services:
-    Gbenitez\Bundle\AttributeBundle\Entity\Attribute:
+    Gbenitez\AttributeBundle\Entity\Attribute:
         class: '%benitez_attribute.attribute_entity.class%'
 
-    Gbenitez\Bundle\AttributeBundle\Entity\AttributeRepository:
+    Gbenitez\AttributeBundle\Entity\AttributeRepository:
         class: '%benitez_attribute.attribute_repository.class%'
         factory: [ "@doctrine.orm.entity_manager", getRepository ]
         arguments:
-            - 'Gbenitez\Bundle\AttributeBundle\Entity\Attribute'
+            - 'Gbenitez\AttributeBundle\Entity\Attribute'
 
-    Gbenitez\Bundle\AttributeBundle\Controller\AttributeController:
+    Gbenitez\AttributeBundle\Controller\AttributeController:
         class: '%benitez_attribute.controller.class%'
         arguments:
           - '@attribute.repository'
 
     attribute.attribute_value:
-        class: Gbenitez\Bundle\AttributeBundle\Form\Type\AttributeValueType
+        class: Gbenitez\AttributeBundle\Form\Type\AttributeValueType
         public: true
         arguments:
             - "@=service('doctrine.orm.entity_manager').getRepository('GbenitezAttributeBundle:Attribute')"
@@ -29,38 +29,38 @@ services:
             - { name: form.type, alias: attribute_value }
 
     attribute.attributes:
-        class: Gbenitez\Bundle\AttributeBundle\Form\Type\AttributesType
+        class: Gbenitez\AttributeBundle\Form\Type\AttributesType
         public: true
         tags:
             - { name: form.type, alias: attributes }
 
     attribute.yaml:
-        class: Gbenitez\Bundle\AttributeBundle\Form\Type\YamlType
+        class: Gbenitez\AttributeBundle\Form\Type\YamlType
         public: true
         tags:
             - { name: form.type }
 
     attribute.manager:
-        class: Gbenitez\Bundle\AttributeBundle\Model\AttributeManager
+        class: Gbenitez\AttributeBundle\Model\AttributeManager
         public: true
         arguments:
             - "@doctrine.orm.entity_manager"
 
     attribute.form.type.target_entity:
-        class: Gbenitez\Bundle\AttributeBundle\Form\Type\Admin\TargetEntityType
+        class: Gbenitez\AttributeBundle\Form\Type\Admin\TargetEntityType
         public: true
         arguments: [""]
         tags:
             - { name: "form.type" }
 
-    #Gbenitez\Bundle\AttributeBundle\Form\Region\AttributeRegionFilter: ~
+    #Gbenitez\AttributeBundle\Form\Region\AttributeRegionFilter: ~
 
-    #Gbenitez\Bundle\AttributeBundle\Model\Region\AttributeRegionResolver: ~
+    #Gbenitez\AttributeBundle\Model\Region\AttributeRegionResolver: ~
 
-    #Gbenitez\Bundle\AttributeBundle\Util\AttributeValuePrinter: ~
+    #Gbenitez\AttributeBundle\Util\AttributeValuePrinter: ~
 
     #attribute.twig.extension.attribute:
-        #class: Gbenitez\Bundle\AttributeBundle\Twig\Extension\AttributeExtension
+        #class: Gbenitez\AttributeBundle\Twig\Extension\AttributeExtension
         #public: true
         #autowire: true
         #autoconfigure: true
@@ -68,12 +68,12 @@ services:
             #- { name: "twig.extension" }
 
     #attribute.form.type.value_template:
-        #class: Gbenitez\Bundle\AttributeBundle\Form\Type\Admin\ValueTemplateType
+        #class: Gbenitez\AttributeBundle\Form\Type\Admin\ValueTemplateType
         #public: true
         #arguments: ["@twig"]
         #tags:
             #- { name: 'form.type' }
 
     #attribute.extractor.attribute_value:
-        #class: Gbenitez\Bundle\AttributeBundle\Util\AttributeValueArrayExtractor
+        #class: Gbenitez\AttributeBundle\Util\AttributeValueArrayExtractor
         #public: true

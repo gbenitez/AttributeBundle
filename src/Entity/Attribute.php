@@ -1,16 +1,16 @@
 <?php
 
-namespace Gbenitez\Bundle\AttributeBundle\Entity;
+namespace Gbenitez\AttributeBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Gbenitez\Bundle\AttributeBundle\Model\AttributeTypes;
+use Gbenitez\AttributeBundle\Model\AttributeTypes;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Attributes
  *
  * @ORM\Table(name="attribute_system_attribute")
- * @ORM\Entity(repositoryClass="Gbenitez\Bundle\AttributeBundle\Entity\Repository\AttributeRepository")
+ * @ORM\Entity(repositoryClass="Gbenitez\AttributeBundle\Entity\Repository\AttributeRepository")
  *
  */
 class Attribute
@@ -102,7 +102,7 @@ class Attribute
     private $constraints;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Gbenitez\Bundle\AttributeBundle\Entity\AttributeOwnerInterface")
+     * @ORM\ManyToOne(targetEntity="Gbenitez\AttributeBundle\Entity\AttributeOwnerInterface")
      * @var AttributeOwnerInterface
      */
     protected $owner;
@@ -330,7 +330,7 @@ class Attribute
      */
     private function setUpdatedAt(\DateTime $updatedAt)
     {
-        throw new \InvalidArgumentException("Est� valor no puede ser establecido manualmente");
+        throw new \InvalidArgumentException("Est valor no puede ser establecido manualmente");
     }
 
     /**

@@ -1,9 +1,9 @@
 <?php
 
-namespace Gbenitez\Bundle\AttributeBundle\Util;
+namespace Gbenitez\AttributeBundle\Util;
 
-use Gbenitez\Bundle\AttributeBundle\Entity\AttributeValueInterface;
-use Gbenitez\Bundle\AttributeBundle\Util\Twig;
+use Gbenitez\AttributeBundle\Entity\AttributeValueInterface;
+use Gbenitez\AttributeBundle\Util\Twig;
 use Twig\Twig_Error;
 
 /**

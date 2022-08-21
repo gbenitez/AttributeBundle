@@ -14,12 +14,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Gbenitez\\Bundle\\AttributeBundle\\": "src/"
+      "Gbenitez\\AttributeBundle\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Gbenitez\\Bundle\\AttributeBundle\\Tests\\": "tests/"
+      "Gbenitez\\AttributeBundle\\Tests\\": "tests/"
     }
   },
   "extra": {

@@ -1,7 +1,7 @@
 easy_admin:
     entities:
         Attribute:
-            class: Gbenitez\Bundle\AttributeBundle\Entity\Attribute
+            class: Gbenitez\AttributeBundle\Entity\Attribute
             label: Form Attributes
             templates:
                 new: "@GbenitezAttribute/easy_admin/new.html.twig"
@@ -15,11 +15,11 @@ easy_admin:
                     - 'presentation'
                     -
                         property: 'targetEntity'
-                        type: 'Gbenitez\Bundle\AttributeBundle\Form\Type\Admin\TargetEntityType'
+                        type: 'Gbenitez\AttributeBundle\Form\Type\Admin\TargetEntityType'
                     - { property: 'type' }
                     -
                         property: 'value_template'
-                        type: 'Gbenitez\Bundle\AttributeBundle\Form\Type\Admin\ValueTemplateType'
+                        type: 'Gbenitez\AttributeBundle\Form\Type\Admin\ValueTemplateType'
                         required: false
                         type_options:
                             attr: { 'data-ace': 'twig', 'data-ace-height': '100px' }
@@ -35,16 +35,16 @@ easy_admin:
                         property: 'region'
                         type: 'entity'
                         type_options:
-                            class: '@Gbenitez\Bundle\AttributeBundle\Entity\Region'
+                            class: '@Gbenitez\AttributeBundle\Entity\Region'
                     - 'containerClass'
                     -
                         property: 'configuration'
-                        type: 'Gbenitez\Bundle\AttributeBundle\Form\Type\YamlType'
+                        type: 'Gbenitez\AttributeBundle\Form\Type\YamlType'
                         type_options:
                             attr: { 'data-ace': 'yaml' }
                     -
                         property: constraints
-                        type: 'Gbenitez\Bundle\AttributeBundle\Form\Type\YamlType'
+                        type: 'Gbenitez\AttributeBundle\Form\Type\YamlType'
                         type_options:
                             attr: { 'data-ace': 'yaml', 'data-ace-height': '200px' }
                     -
@@ -69,5 +69,5 @@ easy_admin:
                             si el contexto es "show" la función será "show_action($element)".
                     - { property: 'active', required: false }
         Region:
-            class: '@Gbenitez\Bundle\AttributeBundle\Entity\Region'
+            class: '@Gbenitez\AttributeBundle\Entity\Region'
             label: 'Regions [Attributes]'

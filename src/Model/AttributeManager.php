@@ -6,7 +6,7 @@
  * Time: 02:06 PM
  */
 
-namespace Gbenitez\Bundle\AttributeBundle\Model;
+namespace Gbenitez\AttributeBundle\Model;
 
 
 use Doctrine\ORM\EntityManager;

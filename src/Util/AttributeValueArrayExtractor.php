@@ -1,6 +1,6 @@
 <?php
 
-namespace Gbenitez\Bundle\AttributeBundle\Util;
+namespace Gbenitez\AttributeBundle\Util;
 
 /**
  * @author Manuel Aguirre <programador.manuel@gmail.com>

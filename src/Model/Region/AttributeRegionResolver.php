@@ -1,9 +1,9 @@
 <?php
 
-namespace Gbenitez\Bundle\AttributeBundle\Model\Region;
+namespace Gbenitez\AttributeBundle\Model\Region;
 
-use Gbenitez\Bundle\AttributeBundle\Entity\Attribute;
-use Gbenitez\Bundle\AttributeBundle\Entity\AttributeValueInterface;
+use Gbenitez\AttributeBundle\Entity\Attribute;
+use Gbenitez\AttributeBundle\Entity\AttributeValueInterface;
 
 /**
  * @author Manuel Aguirre <programador.manuel@gmail.com>

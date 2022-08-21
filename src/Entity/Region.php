@@ -1,6 +1,6 @@
 <?php
 
-namespace Gbenitez\Bundle\AttributeBundle\Entity;
+namespace Gbenitez\AttributeBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Region
  *
  * @ORM\Table(name="attribute_system_region")
- * @ORM\Entity(repositoryClass="Gbenitez\Bundle\AttributeBundle\Entity\RegionRepository")
+ * @ORM\Entity(repositoryClass="Gbenitez\AttributeBundle\Entity\RegionRepository")
  */
 class Region
 {

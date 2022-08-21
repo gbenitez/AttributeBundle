@@ -1,8 +1,8 @@
 <?php
 
-namespace Gbenitez\Bundle\AttributeBundle\Form\Type;
+namespace Gbenitez\AttributeBundle\Form\Type;
 
-use Gbenitez\Bundle\AttributeBundle\Form\DataTransformer\ArrayToYamlTransformer;
+use Gbenitez\AttributeBundle\Form\DataTransformer\ArrayToYamlTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;

@@ -1,9 +1,9 @@
 <?php
 
-namespace Gbenitez\Bundle\AttributeBundle\Controller;
+namespace Gbenitez\AttributeBundle\Controller;
 
 use Doctrine\ORM\EntityRepository;
-use Gbenitez\Bundle\AttributeBundle\Entity\Repository\AttributeRepository;
+use Gbenitez\AttributeBundle\Entity\Repository\AttributeRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

@@ -8,9 +8,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Gbenitez\Bundle\AttributeBundle\Form\Region;
+namespace Gbenitez\AttributeBundle\Form\Region;
 
-use Gbenitez\Bundle\AttributeBundle\Entity\Attribute;
+use Gbenitez\AttributeBundle\Entity\Attribute;
 use PHPUnit_Framework_TestCase;
 use Symfony\Component\Form\FormView;
 

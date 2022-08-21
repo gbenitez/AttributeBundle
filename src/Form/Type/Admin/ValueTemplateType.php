@@ -1,8 +1,8 @@
 <?php
 
-namespace Gbenitez\Bundle\AttributeBundle\Form\Type\Admin;
+namespace Gbenitez\AttributeBundle\Form\Type\Admin;
 
-use Gbenitez\Bundle\AttributeBundle\Entity\Attribute;
+use Gbenitez\AttributeBundle\Entity\Attribute;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;

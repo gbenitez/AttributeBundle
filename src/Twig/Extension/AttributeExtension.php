@@ -1,11 +1,11 @@
 <?php
 
-namespace Gbenitez\Bundle\AttributeBundle\Twig\Extension;
+namespace Gbenitez\AttributeBundle\Twig\Extension;
 
-use Gbenitez\Bundle\AttributeBundle\Entity\AttributeValueInterface;
-use Gbenitez\Bundle\AttributeBundle\Form\Region\AttributeRegionFilter;
-use Gbenitez\Bundle\AttributeBundle\Model\Region\AttributeRegionResolver;
-use Gbenitez\Bundle\AttributeBundle\Util\AttributeValuePrinter;
+use Gbenitez\AttributeBundle\Entity\AttributeValueInterface;
+use Gbenitez\AttributeBundle\Form\Region\AttributeRegionFilter;
+use Gbenitez\AttributeBundle\Model\Region\AttributeRegionResolver;
+use Gbenitez\AttributeBundle\Util\AttributeValuePrinter;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
@@ -97,7 +97,7 @@ class AttributeExtension extends AbstractExtension
         }
 
         if ($javascript && null != trim($attribute->getJavascriptCode())) {
-            $content .= $twig->render('@Attribute/_attribute_javascript.html.twig', [
+            $content .= $twig->render('@GbenitezAttribute/_attribute_javascript.html.twig', [
                 'context' => $context,
                 'attribute' => $attribute,
             ]);
