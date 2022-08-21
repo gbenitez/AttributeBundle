@@ -1,6 +1,6 @@
 <?php
 
-namespace Gbenitez\ttributeBundle\DependencyInjection;
+namespace Gbenitez\AttributeBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;

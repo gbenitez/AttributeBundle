@@ -1,6 +1,6 @@
 <?php
 
-namespace Gbenitez\Bundle\AttributeBundle\Entity\Repository;
+namespace Gbenitez\AttributeBundle\Entity\Repository;
 
 
 use Doctrine\DoctrineBundle\Repository\ServiceEntityRepository;
