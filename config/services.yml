@@ -4,6 +4,19 @@ parameters:
     benitez_attribute.attribute_entity.class: Gbenitez\Bundle\AttributeBundle\Entity\Attribute
 
 services:
+    Gbenitez\Bundle\AttributeBundle\Entity\Attribute:
+        class: '%benitez_attribute.attribute_entity.class%'
+        public: true
+        alias: 'attribute.entity'
+
+    Gbenitez\Bundle\AttributeBundle\Entity\Repository\AttributeRepository:
+        class: '%benitez_attribute.attribute_repository.class%'
+        factory: [ "@doctrine.orm.entity_manager", getRepository ]
+        arguments:
+            - '@attribute.entity'
+        alias: 'attribute.repository'
+        public: true
+
     Gbenitez\Bundle\AttributeBundle\Controller\AttributeController:
         public: true
         alias: 'benitez_attribute.controller'
@@ -14,19 +27,6 @@ services:
         arguments:
           - '@attribute.repository'
         autowire: true
-
-    Gbenitez\Bundle\AttributeBundle\Entity\Repository\AttributeRepository:
-        class: '%benitez_attribute.attribute_repository.class%'
-        factory: [ "@doctrine.orm.entity_manager", getRepository ]
-        arguments:
-            - '@attribute.entity'
-        alias: 'attribute.repository'
-        public: true
-
-    Gbenitez\Bundle\AttributeBundle\Entity\Attribute:
-        class: '%benitez_attribute.attribute_entity.class%'
-        public: true
-        alias: 'attribute.entity'
 
     attribute.attribute_value:
         class: Gbenitez\Bundle\AttributeBundle\Form\Type\AttributeValueType

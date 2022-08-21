@@ -1,10 +1,11 @@
 <?php
+declare(strict_types=1);
 
 namespace Gbenitez\Bundle\AttributeBundle;
 
-use Symfony\Component\HttpKernel\Bundle\AbstractBundle;
+use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class GbenitezAttributeBundle extends AbstractBundle
+class GbenitezAttributeBundle extends Bundle
 {
 
 
