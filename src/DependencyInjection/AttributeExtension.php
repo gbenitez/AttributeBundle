@@ -25,7 +25,7 @@ class AttributeExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $container->findDefinition('@gbenitezAttribute.form.type.target_entity')
+        $container->findDefinition('@GbenitezAttribute.form.type.target_entity')
             ->replaceArgument(0, $config['target_entities']);
 
 
