@@ -4,20 +4,31 @@ parameters:
     benitez_attribute.attribute_entity.class: Gbenitez\AttributeBundle\Entity\Attribute
 
 services:
-    Gbenitez\AttributeBundle\Entity\Attribute:
-        class: '%benitez_attribute.attribute_entity.class%'
-
-    Gbenitez\AttributeBundle\Entity\AttributeRepository:
-        class: '%benitez_attribute.attribute_repository.class%'
-        factory: [ "@doctrine.orm.entity_manager", getRepository ]
-        arguments:
-            - 'Gbenitez\AttributeBundle\Entity\Attribute'
-
     Gbenitez\AttributeBundle\Controller\AttributeController:
+        public: true
+        alias: 'gbenitez_attribute.controller'
+
+    gbenitez_attribute.controller:
         class: '%benitez_attribute.controller.class%'
         public: true
         arguments:
-          - Gbenitez\AttributeBundle\Entity\AttributeRepository
+            - '@gbenitez_attribute_attribute_repository'
+        autowire: true
+
+    gbenitez_attribute_entity_attribute:
+        class: '%benitez_attribute.attribute_entity.class%'
+
+    gbenitez_attribute_attribute_repository:
+        class: '%benitez_attribute.attribute_repository.class%'
+        factory: [ "@doctrine.orm.entity_manager", getRepository ]
+        arguments:
+            - '@gbenitez_attribute_entity_attribute'
+
+    #Gbenitez\AttributeBundle\Controller\AttributeController:
+        #class: '%benitez_attribute.controller.class%'
+        #public: true
+        #arguments:
+          #- Gbenitez\AttributeBundle\Entity\AttributeRepository
 
     attribute.attribute_value:
         class: Gbenitez\AttributeBundle\Form\Type\AttributeValueType
