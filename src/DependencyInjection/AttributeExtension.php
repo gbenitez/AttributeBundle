@@ -1,6 +1,6 @@
 <?php
 
-namespace gbenitez\Bundle\AttributeBundle\DependencyInjection;
+namespace Gbenitez\Bundle\AttributeBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -19,13 +19,15 @@ class AttributeExtension extends Extension
      */
     public function load(array $configs, ContainerBuilder $container)
     {
-        $configuration = new Configuration();
-        $config = $this->processConfiguration($configuration, $configs);
-
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../../config'));
         $loader->load('services.yml');
 
-        $container->findDefinition('attribute.form.type.target_entity')
+        $configuration = new Configuration();
+        $config = $this->processConfiguration($configuration, $configs);
+
+        $container->findDefinition('@gbenitezAttribute.form.type.target_entity')
             ->replaceArgument(0, $config['target_entities']);
+
+
     }
 }

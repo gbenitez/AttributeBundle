@@ -1,6 +1,6 @@
 <?php
 
-namespace gbenitez\Bundle\AttributeBundle\Form\Region;
+namespace Gbenitez\Bundle\AttributeBundle\Form\Region;
 
 use gbenitez\Bundle\AttributeBundle\Entity\Attribute;
 use Symfony\Component\Form\FormView;

@@ -2,10 +2,10 @@
 
 namespace Util;
 
-use gbenitez\Bundle\AttributeBundle\Entity\Attribute;
-use gbenitez\Bundle\AttributeBundle\Entity\AttributeValueInterface;
-use gbenitez\Bundle\AttributeBundle\Util\AttributeValuePrinter;
-use gbenitez\Bundle\AttributeBundle\Util\DateTime;
+use Gbenitez\Bundle\AttributeBundle\Entity\Attribute;
+use Gbenitez\Bundle\AttributeBundle\Entity\AttributeValueInterface;
+use Gbenitez\Bundle\AttributeBundle\Util\AttributeValuePrinter;
+use Gbenitez\Bundle\AttributeBundle\Util\DateTime;
 use PHPUnit_Framework_TestCase;
 use Prophecy\Argument;
 use Twig_Environment;

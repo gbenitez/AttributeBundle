@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace gbenitez\Bundle\AttributeBundle\src\DataTransformer;
+namespace Gbenitez\Bundle\AttributeBundle\src\DataTransformer;
 
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Yaml\Yaml;

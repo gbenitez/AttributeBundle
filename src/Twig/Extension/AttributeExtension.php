@@ -1,11 +1,11 @@
 <?php
 
-namespace gbenitez\Bundle\AttributeBundle\Twig\Extension;
+namespace Gbenitez\Bundle\AttributeBundle\Twig\Extension;
 
-use gbenitez\Bundle\AttributeBundle\Entity\AttributeValueInterface;
-use gbenitez\Bundle\AttributeBundle\Form\Region\AttributeRegionFilter;
-use gbenitez\Bundle\AttributeBundle\Model\Region\AttributeRegionResolver;
-use gbenitez\Bundle\AttributeBundle\Util\AttributeValuePrinter;
+use Gbenitez\Bundle\AttributeBundle\Entity\AttributeValueInterface;
+use Gbenitez\Bundle\AttributeBundle\Form\Region\AttributeRegionFilter;
+use Gbenitez\Bundle\AttributeBundle\Model\Region\AttributeRegionResolver;
+use Gbenitez\Bundle\AttributeBundle\Util\AttributeValuePrinter;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;

@@ -1,9 +1,9 @@
 <?php
 
-namespace gbenitez\Bundle\AttributeBundle\Entity;
+namespace Gbenitez\Bundle\AttributeBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use gbenitez\Bundle\AttributeBundle\Model\AttributeTypes;
+use Gbenitez\Bundle\AttributeBundle\Model\AttributeTypes;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**

@@ -1,36 +1,30 @@
 <?php
 
-namespace gbenitez\Bundle\AttributeBundle\Controller;
+namespace Gbenitez\Bundle\AttributeBundle\Controller;
 
 use Doctrine\ORM\EntityRepository;
-use gbenitez\Bundle\AttributeBundle\Entity\Attribute;
-use gbenitez\Bundle\AttributeBundle\Entity\Region;
-use gbenitez\Bundle\AttributeBundle\Entity\Repository\AttributeRepository;
-use gbenitez\Bundle\AttributeBundle\Form\Type\YamlType;
-use gbenitez\Bundle\AttributeBundle\Model\AttributeTypes;
+use Gbenitez\Bundle\AttributeBundle\Entity\Repository\AttributeRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
 use \Symfony\Component\HttpFoundation\Response;
 
-class AttributeController extends AbstractController
+class AttributeController
 {
     /** @var AttributeRepository  */
-    public AttributeRepository $attributeRepository;
+    ///public AttributeRepository $attributeRepository;
 
     /**
      * CaptchaController constructor.
      *
      * @param AttributeRepository $attributeRepository
      */
-    public function __construct(AttributeRepository $attributeRepository)
+   /* public function __construct(AttributeRepository $attributeRepository)
     {
         $this->attributeRepository = $attributeRepository;
-    }
+    }*/
 
 
     public function listAction(): Response

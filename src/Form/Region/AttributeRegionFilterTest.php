@@ -8,7 +8,7 @@
  * file that was distributed with this source code.
  */
 
-namespace gbenitez\Bundle\AttributeBundle\Form\Region;
+namespace Gbenitez\Bundle\AttributeBundle\Form\Region;
 
 use gbenitez\Bundle\AttributeBundle\Entity\Attribute;
 use PHPUnit_Framework_TestCase;

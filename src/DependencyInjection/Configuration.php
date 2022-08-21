@@ -1,6 +1,6 @@
 <?php
 
-namespace gbenitez\Bundle\AttributeBundle\DependencyInjection;
+namespace Gbenitez\Bundle\AttributeBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -17,7 +17,7 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder("attribute");
+        $treeBuilder = new TreeBuilder("gbenitez_attribute");
         $rootNode = $treeBuilder->getRootNode();
 
         // Here you should define the parameters that are allowed to

@@ -8,11 +8,11 @@
  * file that was distributed with this source code.
  */
 
-namespace gbenitez\Bundle\AttributeBundle\Model\Region;
+namespace Gbenitez\Bundle\AttributeBundle\Model\Region;
 
-use gbenitez\Bundle\AttributeBundle\Entity\Attribute;
-use gbenitez\Bundle\AttributeBundle\Entity\AttributeValueInterface;
-use gbenitez\Bundle\AttributeBundle\Entity\Region;
+use Gbenitez\Bundle\AttributeBundle\Entity\Attribute;
+use Gbenitez\Bundle\AttributeBundle\Entity\AttributeValueInterface;
+use Gbenitez\Bundle\AttributeBundle\Entity\Region;
 use PHPUnit_Framework_TestCase;
 
 /**

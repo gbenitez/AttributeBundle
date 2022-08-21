@@ -6,11 +6,11 @@
  * Time: 02:06 PM
  */
 
-namespace gbenitez\Bundle\AttributeBundle\Model;
+namespace Gbenitez\Bundle\AttributeBundle\Model;
 
 
 use Doctrine\ORM\EntityManager;
-use gbenitez\Bundle\AttributeBundle\Entity\Attribute;
+use Gbenitez\Bundle\AttributeBundle\Entity\Attribute;
 
 class AttributeManager
 {

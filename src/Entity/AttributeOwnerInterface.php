@@ -1,6 +1,6 @@
 <?php
 
-namespace gbenitez\Bundle\AttributeBundle\Entity;
+namespace Gbenitez\Bundle\AttributeBundle\Entity;
 
 
 interface AttributeOwnerInterface

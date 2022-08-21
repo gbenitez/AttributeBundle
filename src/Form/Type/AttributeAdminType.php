@@ -6,7 +6,7 @@
  * Time: 12:52 AM
  */
 
-namespace gbenitez\Bundle\AttributeBundle\Form\Type;
+namespace Gbenitez\Bundle\AttributeBundle\Form\Type;
 
 use Doctrine\ORM\EntityRepository;
 use gbenitez\Bundle\AttributeBundle\Entity\Region;
