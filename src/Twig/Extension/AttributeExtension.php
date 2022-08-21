@@ -10,7 +10,7 @@ use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
 use Twig\TwigTest;
-use function gbenitez\Bundle\AttributeBundle\Twig\Extension\strtr;
+//use function gbenitez\Bundle\AttributeBundle\Twig\Extension\strtr;
 
 /**
  * @author Manuel Aguirre <programador.manuel@gmail.com>

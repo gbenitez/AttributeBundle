@@ -53,25 +53,27 @@ services:
         tags:
             - { name: "form.type" }
 
-    Gbenitez\Bundle\AttributeBundle\Form\Region\AttributeRegionFilter: ~
+    #Gbenitez\Bundle\AttributeBundle\Form\Region\AttributeRegionFilter: ~
 
-    Gbenitez\Bundle\AttributeBundle\Model\Region\AttributeRegionResolver: ~
+    #Gbenitez\Bundle\AttributeBundle\Model\Region\AttributeRegionResolver: ~
 
-    Gbenitez\Bundle\AttributeBundle\Util\AttributeValuePrinter: ~
+    #Gbenitez\Bundle\AttributeBundle\Util\AttributeValuePrinter: ~
 
-    attribute.twig.extension.attribute:
-        class: Gbenitez\Bundle\AttributeBundle\Twig\Extension\AttributeExtension
-        public: true
-        tags:
-            - { name: "twig.extension" }
+    #attribute.twig.extension.attribute:
+        #class: Gbenitez\Bundle\AttributeBundle\Twig\Extension\AttributeExtension
+        #public: true
+        #autowire: true
+        #autoconfigure: true
+        #tags:
+            #- { name: "twig.extension" }
 
-    attribute.form.type.value_template:
-        class: Gbenitez\Bundle\AttributeBundle\Form\Type\Admin\ValueTemplateType
-        public: true
-        arguments: ["@twig"]
-        tags:
-            - { name: 'form.type' }
+    #attribute.form.type.value_template:
+        #class: Gbenitez\Bundle\AttributeBundle\Form\Type\Admin\ValueTemplateType
+        #public: true
+        #arguments: ["@twig"]
+        #tags:
+            #- { name: 'form.type' }
 
-    attribute.extractor.attribute_value:
-        class: Gbenitez\Bundle\AttributeBundle\Util\AttributeValueArrayExtractor
-        public: true
+    #attribute.extractor.attribute_value:
+        #class: Gbenitez\Bundle\AttributeBundle\Util\AttributeValueArrayExtractor
+        #public: true
