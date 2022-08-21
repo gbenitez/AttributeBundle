@@ -10,7 +10,7 @@
 
 namespace Gbenitez\Bundle\AttributeBundle\Form\Region;
 
-use gbenitez\Bundle\AttributeBundle\Entity\Attribute;
+use Gbenitez\Bundle\AttributeBundle\Entity\Attribute;
 use PHPUnit_Framework_TestCase;
 use Symfony\Component\Form\FormView;
 

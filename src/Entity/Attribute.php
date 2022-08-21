@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Attributes
  *
  * @ORM\Table(name="attribute_system_attribute")
- * @ORM\Entity(repositoryClass="gbenitez\Bundle\AttributeBundle\Entity\Repository\AttributeRepository")
+ * @ORM\Entity(repositoryClass="Gbenitez\Bundle\AttributeBundle\Entity\Repository\AttributeRepository")
  *
  */
 class Attribute
@@ -102,7 +102,7 @@ class Attribute
     private $constraints;
 
     /**
-     * @ORM\ManyToOne(targetEntity="gbenitez\Bundle\AttributeBundle\Entity\AttributeOwnerInterface")
+     * @ORM\ManyToOne(targetEntity="Gbenitez\Bundle\AttributeBundle\Entity\AttributeOwnerInterface")
      * @var AttributeOwnerInterface
      */
     protected $owner;
