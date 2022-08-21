@@ -13,18 +13,18 @@ use \Symfony\Component\HttpFoundation\Response;
 
 class AttributeController
 {
-    /* * @var AttributeRepository  */
-    ///public AttributeRepository $attributeRepository;
+    /** @var AttributeRepository  */
+    public AttributeRepository $attributeRepository;
 
-    /* *
+    /**
      * CaptchaController constructor.
      *
      * @param AttributeRepository $attributeRepository
      */
-   /* public function __construct(AttributeRepository $attributeRepository)
+    public function __construct(AttributeRepository $attributeRepository)
     {
         $this->attributeRepository = $attributeRepository;
-    }*/
+    }
 
 
     public function listAction(): Response
