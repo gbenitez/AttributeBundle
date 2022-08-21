@@ -13,10 +13,10 @@ use \Symfony\Component\HttpFoundation\Response;
 
 class AttributeController
 {
-    /** @var AttributeRepository  */
+    /* * @var AttributeRepository  */
     ///public AttributeRepository $attributeRepository;
 
-    /**
+    /* *
      * CaptchaController constructor.
      *
      * @param AttributeRepository $attributeRepository
@@ -31,7 +31,7 @@ class AttributeController
     {
         $attributes = $this->attributeRepository->getQueryAll();
 
-        return $this->render('@Attribute/admin/list.html.twig', array(
+        return $this->render('@GbenitezAttribute/admin/list.html.twig', array(
             'attributes' => $attributes,
         ));
     }

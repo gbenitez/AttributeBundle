@@ -4,8 +4,8 @@ easy_admin:
             class: Gbenitez\Bundle\AttributeBundle\Entity\Attribute
             label: Form Attributes
             templates:
-                new: "@Attribute/easy_admin/new.html.twig"
-                edit: "@Attribute/easy_admin/edit.html.twig"
+                new: "@GbenitezAttribute/easy_admin/new.html.twig"
+                edit: "@GbenitezAttribute/easy_admin/edit.html.twig"
             list:
                 title: 'Form Attributes'
                 fields: ['id', 'name', 'presentation', 'type', 'targetEntity', 'region', 'owner', 'active']
@@ -35,7 +35,7 @@ easy_admin:
                         property: 'region'
                         type: 'entity'
                         type_options:
-                            class: Gbenitez\Bundle\AttributeBundle\Entity\Region
+                            class: '@Gbenitez\Bundle\AttributeBundle\Entity\Region'
                     - 'containerClass'
                     -
                         property: 'configuration'
@@ -69,5 +69,5 @@ easy_admin:
                             si el contexto es "show" la función será "show_action($element)".
                     - { property: 'active', required: false }
         Region:
-            class: Gbenitez\Bundle\AttributeBundle\Entity\Region
+            class: '@Gbenitez\Bundle\AttributeBundle\Entity\Region'
             label: 'Regions [Attributes]'
