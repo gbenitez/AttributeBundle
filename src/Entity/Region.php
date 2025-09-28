@@ -4,98 +4,53 @@ namespace Gbenitez\AttributeBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * Region
- *
- * @ORM\Table(name="attribute_system_region")
- * @ORM\Entity(repositoryClass="Gbenitez\AttributeBundle\Entity\RegionRepository")
- */
+#[ORM\Entity(repositoryClass: RegionRepository::class)]
+#[ORM\Table(name: "attribute_system_region")]
 class Region
 {
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: "AUTO")]
+    #[ORM\Column(name: "id", type: "integer")]
+    private int $id;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=255)
-     */
-    private $name;
+    #[ORM\Column(name: "name", type: "string", length: 255)]
+    private string $name;
 
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="active", type="boolean")
-     */
-    private $active;
+    #[ORM\Column(name: "active", type: "boolean")]
+    private bool $active;
 
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
 
-    /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return Region
-     */
-    public function setName($name)
+    public function setName(string $name): self
     {
         $this->name = $name;
 
         return $this;
     }
 
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * Set active
-     *
-     * @param boolean $active
-     *
-     * @return Region
-     */
-    public function setActive($active)
+    public function setActive(bool $active): self
     {
         $this->active = $active;
 
         return $this;
     }
 
-    /**
-     * Get active
-     *
-     * @return boolean
-     */
-    public function getActive()
+    public function getActive(): bool
     {
         return $this->active;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
-        return (string)$this->getName();
+        return $this->getName();
     }
 
 

@@ -19,10 +19,6 @@ class YamlType extends AbstractType
         return 'yaml';
     }
 
-    public function getName()
-    {
-        return 'yaml';
-    }
 
     public function getParent()
     {

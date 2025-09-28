@@ -7,7 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Manuel Aguirre <programador.manuel@gmail.com>
@@ -20,10 +20,6 @@ class AttributesType extends AbstractType
         return 'attributes';
     }
 
-    public function getName()
-    {
-        return 'attributes';
-    }
 
     /**
      * {@inheritdoc}
@@ -41,24 +37,21 @@ class AttributesType extends AbstractType
             /** @var AttributeValueInterface $attributeValue */
             foreach ($data as $index => $attributeValue) {
                 $attribute = $attributeValue->getAttribute();
-                $form->add($attribute->getName(), 'attribute_value', array(
+                $form->add($attribute->getName(), AttributeValueType::class, [
                     'data_class' => get_class($attributeValue),
                     'label' => $attribute->getPresentation(),
                     'data' => $attributeValue,
                     'property_path' => '['. $index .']',
                     'attribute' => $attribute,
-                ));
+                ]);
             }
         });
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults(array(
-            'global_options' => array(),
-        ));
+        $resolver->setDefaults([
+            'global_options' => [],
+        ]);
     }
 }

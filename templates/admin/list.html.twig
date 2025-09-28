@@ -1,9 +1,9 @@
 {% extends '@GbenitezAttribute/base.html.twig' %}
 
-{% block page_header %}List{% endblock %}
+{% block page_header %}Lista de Attributes{% endblock %}
 {% block page_header_right %}
-    <a href="{{ path('attribute_create') }}" class="btn btn-primary" id="add-translation">
-        <span aria-hidden="true" class="glyphicon glyphicon-plus"></span>add
+    <a href="{{ path('gbenitez_attribute_new') }}" class="btn btn-primary" id="add-translation">
+        <span aria-hidden="true" class="glyphicon glyphicon-plus"></span>Agregar
     </a>
 {% endblock %}
 {% block content %}
@@ -38,12 +38,7 @@
     </div>
 {% endblock %}
 {% block row_actions %}
-    {% embed '@Attribute/dropdown.html.twig' with {align: 'right'} %}
-        {% from '@Attribute/dropdown.html.twig' import item, divider %}
-        {% from '@Attribute/icons.html.twig' import icon_edit, icon %}
-        {% block header %}Actions{% endblock %}
-        {% block body %}
-                {{ item(path("attribute_edit", {id: item.id}), 'edit'|trans, icon_edit()) }}
-        {% endblock %}
-    {% endembed %}
+    <a href="{{ path('gbenitez_attribute_edit', {id: item.id}) }}" class="btn btn-sm btn-primary">
+        Editar
+    </a>
 {% endblock %}

@@ -1,37 +1,49 @@
 #### Documentación Attributes
 
+## Requisitos
+
+- PHP 8.2 o superior
+- Symfony 7.0 o superior
+- Twig 3.0 o superior
+
+## Instalación
+
 Agregar al composer.json:
 
 ```php
 "require" : {
-   "gbenitez/attribute-bundle": "dev-master"
+   "gbenitez/attribute-bundle": "^3.0"
 }
 ```
-Registrar los bundles en el **AppKernel.php**:
+Registrar el bundle en **config/bundles.php**:
 
 ```php
-public function registerBundles()
-{
-    $bundles = array(
-            new gbenitez\Bundle\AttributeBundle\AttributeBundle(),
-            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
-        );
-    ...
-}
+<?php
+
+return [
+    // ... otros bundles
+    Gbenitez\AttributeBundle\GbenitezAttributeBundle::class => ['all' => true],
+];
 ```
-En el **app/config/routing.yml** agregar:
+En **config/routes.yaml** agregar:
 
 ```yaml
 gbenitez_attribute:
-    resource: "@AttributeBundle/Controller/"
-    type:     annotation
-    prefix:   /admin/attributes
+    resource: "@GbenitezAttributeBundle/config/routing/routing.yaml"
+```
+
+O alternativamente, puedes cargar directamente los controladores:
+
+```yaml
+gbenitez_attribute_controllers:
+    resource: "@GbenitezAttributeBundle/src/Controller/"
+    type: attribute
 ```
 
 Agregar a la bd las tablas del bundle:
 
-    php app/console doctrine:database:create
-    php app/console doctrine:schema:update --force
+    php bin/console doctrine:database:create
+    php bin/console doctrine:schema:update --force
 
 
 #### Entity Attributes
@@ -59,66 +71,39 @@ Será la encargada de la relación con attribute y nuestra entidad y obtendrá e
 > Entity/AttributeValueTargetEntity.php
 
 
-####Ejemplo de la Entity AttributeValueTargetEntity
+#### Ejemplo de la Entity AttributeValueTargetEntity
 
 ```php
 <?php
 
-namespace AppBundle\Entity;
+namespace App\Entity;
 
-use gbenitez\Bundle\AttributeBundle\Entity\AbstractAttributeValue;
-use gbenitez\Bundle\AttributeBundle\Entity\Attribute;
-use gbenitez\Bundle\AttributeBundle\Model\AttributeTypes;
+use Gbenitez\AttributeBundle\Entity\AbstractAttributeValue;
+use Gbenitez\AttributeBundle\Entity\Attribute;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * AttributeValues
- *
- * @ORM\Table(name="attribute_value_target_entity")
- * @ORM\Entity
- */
+#[ORM\Entity]
+#[ORM\Table(name: "attribute_value_target_entity")]
 class AttributeValueTargetEntity extends AbstractAttributeValue
 {
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: "AUTO")]
+    #[ORM\Column(name: "id", type: "integer")]
+    private int $id;
 
-    /**
-     * @var string
-     *
-     * @ORM\ManyToOne(targetEntity="gbenitez\Bundle\AttributeBundle\Entity\Attribute")
-     * @Assert\NotBlank()
-     */
-    protected $attribute;
+    #[ORM\ManyToOne(targetEntity: Attribute::class)]
+    #[Assert\NotBlank()]
+    protected ?Attribute $attribute = null;
 
-    /**
-     * @var array
-     *
-     * @ORM\Column(name="value", type="array", length=255, nullable=true)
-     */
-    protected $value;
+    #[ORM\Column(name: "value", type: "array", length: 255, nullable: true)]
+    protected mixed $value = null;
 
-    /**
-     * @var string
-     *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\TargetEntity")
-     * @Assert\NotBlank()
-     */
-    private $targetEntityAttribute;
+    #[ORM\ManyToOne(targetEntity: TargetEntity::class)]
+    #[Assert\NotBlank()]
+    private ?TargetEntity $targetEntityAttribute = null;
 
-    /**
-     * AttributeValueCompany constructor.
-     *
-     * @param string $attribute
-     * @param string $targetEntityAttribute
-     */
-    public function __construct(Attribute $attribute = null, TargetEntity $targetEntityAttribute = null)
+    public function __construct(?Attribute $attribute = null, ?TargetEntity $targetEntityAttribute = null)
     {
         $this->attribute = $attribute;
         $this->targetEntityAttribute = $targetEntityAttribute;
@@ -215,18 +200,14 @@ class AttributeValueTargetEntity extends AbstractAttributeValue
 #### Ejemplo de la Entity TargetEntity
 ```php
 
-/**
-     * @var Assert\Collection
-     *
-     * @ORM\OneToMany(
-     *  targetEntity="AppBundle\Entity\AttributeValueTargetEntity",
-     *  mappedBy="targetEntityAttribute",
-     *  cascade={"all"},
-     *  orphanRemoval=true
-     * )
-     * @Assert\Valid
-     */
-    private $attributes;
+    #[ORM\OneToMany(
+        targetEntity: AttributeValueTargetEntity::class,
+        mappedBy: "targetEntityAttribute",
+        cascade: ["all"],
+        orphanRemoval: true
+    )]
+    #[Assert\Valid]
+    private Collection $attributes;
 
     /**
      * Constructor
@@ -235,14 +216,7 @@ class AttributeValueTargetEntity extends AbstractAttributeValue
     {
         $this->attributes = new \Doctrine\Common\Collections\ArrayCollection();
     }
-    /**
-     * Add attributes
-     *
-     * @param \AppBundle\Entity\AttributeValueTargetEntity $attributes
-     *
-     * @return TargetEntity
-     */
-    public function addAttributes(\AppBundle\Entity\AttributeValueTargetEntity $attributes)
+    public function addAttributes(AttributeValueTargetEntity $attributes): self
     {
         $this->attributes[] = $attributes;
 
@@ -251,24 +225,14 @@ class AttributeValueTargetEntity extends AbstractAttributeValue
         return $this;
     }
 
-    /**
-     * Remove attributes
-     *
-     * @param \AppBundle\Entity\AttributeValueTargetEntity $attributes
-     */
-    public function removeAttributes(\AppBundle\Entity\AttributeValueTargetEntity $attributes)
+    public function removeAttributes(AttributeValueTargetEntity $attributes): void
     {
         $this->attributes->removeElement($attributes);
 
         $attributes->setTargetEntityAttribute(null);
     }
 
-    /**
-     * Get attributes
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getAttributes()
+    public function getAttributes(): Collection
     {
         return $this->attributes;
     }

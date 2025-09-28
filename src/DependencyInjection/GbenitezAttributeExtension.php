@@ -25,8 +25,10 @@ class GbenitezAttributeExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $definition = $container->getDefinition('attribute.form.type.target_entity');
-        $definition->replaceArgument(0, $config['target_entities']);
+        if ($container->hasDefinition('Gbenitez\AttributeBundle\Form\Type\Admin\TargetEntityType')) {
+            $definition = $container->getDefinition('Gbenitez\AttributeBundle\Form\Type\Admin\TargetEntityType');
+            $definition->replaceArgument('$targetEntityNames', $config['target_entities']);
+        }
 
 
     }

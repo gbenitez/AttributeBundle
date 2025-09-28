@@ -3,17 +3,11 @@
 namespace Gbenitez\AttributeBundle\Entity\Repository;
 
 
-use Doctrine\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
 use Gbenitez\AttributeBundle\Entity\Attribute;
 
-class AttributeRepository extends ServiceEntityRepository
+class AttributeRepository extends EntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
-    {
-        parent::__construct($registry, Attribute::class);
-    }
 
     public function getQueryAll($filters = array())
     {

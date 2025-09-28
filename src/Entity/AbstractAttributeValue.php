@@ -6,53 +6,32 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @author Manuel Aguirre <programador.manuel@gmail.com>
- *
- * @ORM\MappedSuperclass()
  */
+#[ORM\MappedSuperclass]
 abstract class AbstractAttributeValue implements AttributeValueInterface
 {
-    /**
-     * @var Attribute
-     *
-     * @ORM\ManyToOne(targetEntity="Attribute", fetch="EAGER")
-     */
-    protected $attribute;
+    #[ORM\ManyToOne(targetEntity: Attribute::class, fetch: "EAGER")]
+    protected ?Attribute $attribute = null;
 
-    /**
-     * @var mixed
-     *
-     * @ORM\Column(name="value", type="array", length=255, nullable=true)
-     */
-    protected $value;
+    #[ORM\Column(name: "value", type: "json", nullable: true)]
+    protected mixed $value = null;
 
-    /**
-     * @return Attribute
-     */
-    public function getAttribute()
+    public function getAttribute(): ?Attribute
     {
         return $this->attribute;
     }
 
-    /**
-     * @param Attribute $attribute
-     */
-    public function setAttribute(Attribute $attribute)
+    public function setAttribute(Attribute $attribute): void
     {
         $this->attribute = $attribute;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getValue()
+    public function getValue(): mixed
     {
         return $this->value;
     }
 
-    /**
-     * @param mixed $value
-     */
-    public function setValue($value)
+    public function setValue(mixed $value): void
     {
         $this->value = $value;
     }

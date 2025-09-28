@@ -2,82 +2,143 @@
 
 namespace Gbenitez\AttributeBundle\Controller;
 
-use Doctrine\ORM\EntityRepository;
 use Gbenitez\AttributeBundle\Entity\Repository\AttributeRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Gbenitez\AttributeBundle\Entity\Attribute;
+use Gbenitez\AttributeBundle\Form\Type\AttributeAdminType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use \Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Attribute\Route;
+use Doctrine\ORM\EntityManagerInterface;
 
-class AttributeController
+class AttributeController extends AbstractController
 {
-    /** @var AttributeRepository  */
-    public AttributeRepository $attributeRepository;
-
-    /**
-     * CaptchaController constructor.
-     *
-     * @param AttributeRepository $attributeRepository
-     */
-    public function __construct(AttributeRepository $attributeRepository)
-    {
-        $this->attributeRepository = $attributeRepository;
+    public function __construct(
+        private readonly AttributeRepository $attributeRepository,
+        private readonly EntityManagerInterface $entityManager
+    ) {
     }
 
 
+    #[Route('/admin/attributes/list', name: 'gbenitez_attribute_list', methods: ['GET'])]
     public function listAction(): Response
     {
         $attributes = $this->attributeRepository->getQueryAll();
 
-        return $this->render('@GbenitezAttribute/admin/list.html.twig', array(
+        return $this->render('@GbenitezAttribute/admin/list.html.twig', [
             'attributes' => $attributes,
-        ));
+        ]);
     }
 
 
-    /*public function createAction(Request $request)
+    #[Route('/admin/attributes/new', name: 'gbenitez_attribute_new', methods: ['GET', 'POST'])]
+    public function newAction(Request $request): Response
     {
-        $form = $this->createProfileForm($attribute = new Attribute());
+        $attribute = new Attribute();
+        
+        // Crear un formulario simple para demostración
+        $form = $this->createFormBuilder($attribute)
+            ->add('name', null, [
+                'label' => 'Nombre',
+                'required' => true,
+            ])
+            ->add('presentation', null, [
+                'label' => 'Presentación',
+                'required' => true,
+            ])
+            ->add('type', null, [
+                'label' => 'Tipo',
+                'required' => true,
+            ])
+            ->add('active', null, [
+                'label' => 'Activo',
+                'required' => false,
+            ])
+            ->getForm();
+        
         $form->handleRequest($request);
-
-
-        if ($form->isSubmitted() and $form->isValid()) {
-            $attribute->setCreatedAt(new \Datetime('NOW'));
-            $this->container->get('attribute.manager')->saveAttribute($attribute);
-
-            $this->addFlash('success', 'Attribute Created');
-
-            return $this->redirectToRoute('attributes_list');
+        
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->entityManager->persist($attribute);
+            $this->entityManager->flush();
+            
+            $this->addFlash('success', 'Attribute creado exitosamente');
+            
+            return $this->redirectToRoute('gbenitez_attribute_list');
         }
-
-        return $this->render('@Attribute/admin/create.html.twig', array(
-            'form' => $form->createView(),
-        ));
-    }*/
-
-
-    /*public function editAction(Request $request, Attribute $attribute)
-    {
-        $form = $this->createProfileForm($attribute);
-        $form->handleRequest($request);
-
-
-        if ($form->isSubmitted() and $form->isValid()) {
-
-            $this->container->get('attribute.manager')->saveAttribute($attribute);
-
-            $this->addFlash('success', 'Attribute Updated');
-
-            return $this->redirectToRoute('attributes_list');
-        }
-
-        return $this->render('@Attribute/admin/edit.html.twig', array(
+        
+        return $this->render('@GbenitezAttribute/admin/new.html.twig', [
             'form' => $form->createView(),
             'attribute' => $attribute,
-        ));
-    }*/
+        ]);
+    }
+
+    #[Route('/admin/attributes/{id}/edit', name: 'gbenitez_attribute_edit', methods: ['GET', 'POST'])]
+    public function editAction(Request $request, int $id): Response
+    {
+        $attribute = $this->attributeRepository->find($id);
+        
+        if (!$attribute) {
+            throw $this->createNotFoundException('Attribute no encontrado');
+        }
+        
+        // Crear formulario de edición
+        $form = $this->createFormBuilder($attribute)
+            ->add('name', null, [
+                'label' => 'Nombre',
+                'required' => true,
+            ])
+            ->add('presentation', null, [
+                'label' => 'Presentación',
+                'required' => true,
+            ])
+            ->add('type', null, [
+                'label' => 'Tipo',
+                'required' => true,
+            ])
+            ->add('active', null, [
+                'label' => 'Activo',
+                'required' => false,
+            ])
+            ->getForm();
+        
+        $form->handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->entityManager->flush();
+            
+            $this->addFlash('success', 'Attribute actualizado exitosamente');
+            
+            return $this->redirectToRoute('gbenitez_attribute_list');
+        }
+        
+        return $this->render('@GbenitezAttribute/admin/edit.html.twig', [
+            'form' => $form->createView(),
+            'attribute' => $attribute,
+        ]);
+    }
+
+    #[Route('/admin/attributes/{id}/delete', name: 'gbenitez_attribute_delete', methods: ['DELETE', 'POST'])]
+    public function deleteAction(Request $request, int $id): Response
+    {
+        $attribute = $this->attributeRepository->find($id);
+        
+        if (!$attribute) {
+            throw $this->createNotFoundException('Attribute no encontrado');
+        }
+        
+        // Verificar token CSRF para seguridad
+        if ($this->isCsrfTokenValid('delete'.$attribute->getId(), $request->request->get('_token'))) {
+            $this->entityManager->remove($attribute);
+            $this->entityManager->flush();
+            
+            $this->addFlash('success', 'Attribute eliminado exitosamente');
+        } else {
+            $this->addFlash('error', 'Token de seguridad inválido');
+        }
+        
+        return $this->redirectToRoute('gbenitez_attribute_list');
+    }
 
     /*protected function createProfileForm(Attribute $attribute)
     {

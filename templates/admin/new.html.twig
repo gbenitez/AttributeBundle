@@ -1,8 +1,8 @@
 {% extends '@GbenitezAttribute/base.html.twig' %}
 
-{% block title %}Editar Attribute: {{ attribute.name }}{% endblock %}
+{% block title %}Crear Nuevo Attribute{% endblock %}
 
-{% block page_header %}Editar Attribute: {{ attribute.name }}{% endblock %}
+{% block page_header %}Crear Nuevo Attribute{% endblock %}
 
 {% block content %}
 <div class="row">
@@ -34,14 +34,8 @@
         </div>
         
         <div class="mb-3">
-            <button type="submit" class="btn btn-primary">Actualizar Attribute</button>
+            <button type="submit" class="btn btn-success">Crear Attribute</button>
             <a href="{{ path('gbenitez_attribute_list') }}" class="btn btn-secondary">Cancelar</a>
-            
-            <!-- Botón de eliminar -->
-            <form method="post" action="{{ path('gbenitez_attribute_delete', {id: attribute.id}) }}" style="display: inline-block;" onsubmit="return confirm('¿Estás seguro de que quieres eliminar este attribute?');">
-                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ attribute.id) }}">
-                <button type="submit" class="btn btn-danger">Eliminar</button>
-            </form>
         </div>
         
         {{ form_end(form) }}

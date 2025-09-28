@@ -14,7 +14,7 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\NotNull;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -24,40 +24,14 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  */
 class AttributeValueType extends AbstractType
 {
-    /**
-     * @var AttributeRepository
-     */
-    protected $attributeRepository;
-
-    /**
-     * @var \Doctrine\Common\Persistence\ObjectManager
-     */
-    protected $em;
-    /**
-     * @var TranslatorInterface
-     */
-    private $translator;
-
-    /**
-     * @param AttributeRepository $attributeRepository
-     * @param \Doctrine\Common\Persistence\ObjectManager $em
-     * @param TranslatorInterface $translator
-     */
     public function __construct(
-        AttributeRepository $attributeRepository,
-        \Doctrine\Common\Persistence\ObjectManager $em,
-        TranslatorInterface $translator
+        private readonly AttributeRepository $attributeRepository,
+        private readonly \Doctrine\ORM\EntityManagerInterface $em,
+        private readonly TranslatorInterface $translator
     ) {
-        $this->attributeRepository = $attributeRepository;
-        $this->em = $em;
-        $this->translator = $translator;
     }
 
     public function getBlockPrefix()
-    {
-        return 'attribute_value';
-    }
-    public function getName()
     {
         return 'attribute_value';
     }

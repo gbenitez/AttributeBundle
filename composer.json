@@ -1,16 +1,20 @@
 {
   "name": "gbenitez/attribute-bundle",
-  "version": "2.0",
+  "version": "3.0",
   "type": "symfony-bundle",
   "description": "Symfony Attribute Bundle para Form",
-  "keywords": ["form", "attribute", "bundle"],
+  "keywords": [
+    "form",
+    "attribute",
+    "bundle"
+  ],
   "require": {
-      "php": ">=7.1.3",
-      "ext-gd": "*",
-      "symfony/form": "~5.0|~6.0",
-      "symfony/framework-bundle": "~5.0|~6.0",
-      "symfony/translation": "~5.0|^6.0",
-      "twig/twig": "^2.10|^3.0"
+    "php": ">=7.4",
+    "ext-gd": "*",
+    "symfony/form": "^5.4|^6.0|^7.0",
+    "symfony/framework-bundle": "^5.4|^6.0|^7.0",
+    "symfony/translation": "^5.4|^6.0|^7.0",
+    "twig/twig": "^2.10|^3.0"
   },
   "autoload": {
     "psr-4": {
@@ -24,10 +28,10 @@
   },
   "extra": {
     "branch-alias": {
-      "dev-master": "2.0-dev"
+      "dev-master": "3.0-dev"
     }
   },
   "require-dev": {
-    "symfony/phpunit-bridge": "^6.1"
+    "symfony/phpunit-bridge": "^5.4|^6.0|^7.0"
   }
 }

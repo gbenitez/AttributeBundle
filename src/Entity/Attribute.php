@@ -6,122 +6,63 @@ use Doctrine\ORM\Mapping as ORM;
 use Gbenitez\AttributeBundle\Model\AttributeTypes;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * Attributes
- *
- * @ORM\Table(name="attribute_system_attribute")
- * @ORM\Entity(repositoryClass="Gbenitez\AttributeBundle\Entity\Repository\AttributeRepository")
- *
- */
+#[ORM\Entity(repositoryClass: "Gbenitez\AttributeBundle\Entity\Repository\AttributeRepository")]
+#[ORM\Table(name: "attribute_system_attribute")]
 class Attribute
 {
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
+    #[ORM\Id]
+    #[ORM\GeneratedValue(strategy: "AUTO")]
+    #[ORM\Column(name: "id", type: "integer")]
+    private int $id;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=255)
-     * @Assert\NotBlank(message="Por favor, ingrese un nombre")
-     */
-    private $name;
+    #[ORM\Column(name: "name", type: "string", length: 255)]
+    #[Assert\NotBlank(message: "Por favor, ingrese un nombre")]
+    private string $name;
 
-    /**
-     * @var Region
-     * @ORM\ManyToOne(targetEntity="Region", fetch="EAGER")
-     * @ORM\JoinColumn(nullable=false)
-     * @Assert\NotBlank(message="Por favor, seleccione una región")
-     */
-    private $region;
+    #[ORM\ManyToOne(targetEntity: Region::class, fetch: "EAGER")]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?Region $region = null;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="presentation", type="string", length=255)
-     * @Assert\NotBlank(message="Por favor, ingrese un nombre para etiqueta")
-     */
-    private $presentation;
+    #[ORM\Column(name: "presentation", type: "string", length: 255)]
+    #[Assert\NotBlank(message: "Por favor, ingrese un nombre para etiqueta")]
+    private string $presentation;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="type", type="string", length=255)
-     */
-    private $type = AttributeTypes::TEXT;
+    #[ORM\Column(name: "type", type: "string", length: 255)]
+    private string $type = AttributeTypes::TEXT;
 
-    /**
-     * @var array
-     * @ORM\Column(name="configuration", type="array", nullable=true)
-     */
-    protected $configuration;
+    #[ORM\Column(name: "configuration", type: "json", nullable: true)]
+    protected ?array $configuration = null;
 
-    /**
-     * @var string
-     * @ORM\Column(name="container_class", type="string", nullable=true)
-     */
-    protected $containerClass;
+    #[ORM\Column(name: "container_class", type: "string", nullable: true)]
+    protected ?string $containerClass = null;
 
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="active", type="boolean")
-     */
-    private $active = true;
+    #[ORM\Column(name: "active", type: "boolean")]
+    private bool $active = true;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="target_entity", type="string", length=50, nullable=true)
-     */
-    private $targetEntity;
+    #[ORM\Column(name: "target_entity", type: "string", length: 50, nullable: true)]
+    private ?string $targetEntity = null;
 
-    /**
-     * @ORM\Column(name="position", type="integer" , nullable=true)
-     */
-    private $position;
+    #[ORM\Column(name: "position", type: "integer", nullable: true)]
+    private ?int $position = null;
 
-    /**
-     * @ORM\Column(name="value_template", type="text" , nullable=true)
-     */
-    private $valueTemplate;
+    #[ORM\Column(name: "value_template", type: "text", nullable: true)]
+    private ?string $valueTemplate = null;
 
-    /**
-     * @ORM\Column(name="javascript_code", type="text" , nullable=true)
-     */
-    private $javascriptCode;
+    #[ORM\Column(name: "javascript_code", type: "text", nullable: true)]
+    private ?string $javascriptCode = null;
 
-    /**
-     * @ORM\Column(name="constraints", type="json_array", nullable=true)
-     */
-    private $constraints;
+    #[ORM\Column(name: "constraints", type: "json", nullable: true)]
+    private ?array $constraints = null;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Gbenitez\AttributeBundle\Entity\AttributeOwnerInterface")
-     * @var AttributeOwnerInterface
-     */
-    protected $owner;
+    // Commented out temporarily - requires resolve_target_entities configuration
+    // #[ORM\ManyToOne(targetEntity: AttributeOwnerInterface::class)]
+    // protected ?AttributeOwnerInterface $owner = null;
 
-    /**
-     * @var \DateTime
-     * @ORM\Column(name="created_at", type="datetime")
-     */
-    protected $createdAt;
+    #[ORM\Column(name: "created_at", type: "datetime")]
+    protected \DateTime $createdAt;
 
-    /**
-     * @var \DateTime
-     * @ORM\Column(
-     *      name="updated_at",
-     *      type="datetime",
-     *      columnDefinition="timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"
-     * )
-     */
-    protected $updatedAt;
+    #[ORM\Column(name: "updated_at", type: "datetime", nullable: true)]
+    protected ?\DateTime $updatedAt = null;
 
     /**
      * Attribute constructor.
@@ -131,58 +72,31 @@ class Attribute
         $this->createdAt = new \DateTime('now');
     }
 
-    /**
-     * Get id
-     *
-     * @return integer
-     */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
 
-    /**
-     * Set name
-     *
-     * @param string $name
-     * @return Attribute
-     */
-    public function setName($name)
+    public function setName(string $name): self
     {
         $this->name = $name;
 
         return $this;
     }
 
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * Set presentation
-     *
-     * @param string $presentation
-     * @return Attribute
-     */
-    public function setPresentation($presentation)
+    public function setPresentation(string $presentation): self
     {
         $this->presentation = $presentation;
 
         return $this;
     }
 
-    /**
-     * Get presentation
-     *
-     * @return string
-     */
-    public function getPresentation()
+    public function getPresentation(): string
     {
         return $this->presentation;
     }
@@ -375,21 +289,19 @@ class Attribute
         $this->constraints = $constraints;
     }
 
-    /**
-     * @return AttributeOwnerInterface
-     */
-    public function getOwner()
+    // Commented out temporarily - requires resolve_target_entities configuration
+    /*
+    public function getOwner(): ?AttributeOwnerInterface
     {
         return $this->owner;
     }
 
-    /**
-     * @param AttributeOwnerInterface $owner
-     */
-    public function setOwner(AttributeOwnerInterface $owner)
+    public function setOwner(?AttributeOwnerInterface $owner): self
     {
         $this->owner = $owner;
+        return $this;
     }
+    */
 
     /**
      * @return Region

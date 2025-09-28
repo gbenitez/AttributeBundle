@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}Welcome!{% endblock %}</title>
     {% block stylesheets %}
-        <link href="{{ asset('bundles/attribute/css/lumen_bootstrap.min.css') }}" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     {% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
 </head>
 <body>
 {% block body %}
-    {{ include('@Attribute/header.html.twig') }}
+    {{ include('@GbenitezAttribute/header.html.twig') }}
     {% block main_content %}
         <div class="container {% block container_class %}margin-bottom-25 margin-top-35{% endblock %}">
 
@@ -22,7 +22,7 @@
                     {% block page_actions %}{% endblock %}
                 </div>
 
-                {{ include('@Attribute/flashes.html.twig') }}
+                {{ include('@GbenitezAttribute/flashes.html.twig') }}
 
                 {% block content %}{% endblock %}
             {% endblock page_content %}
@@ -31,9 +31,7 @@
     {% endblock %}
 {% endblock %}
 {% block javascripts %}
-    <script src="{{ asset('bundles/attribute/js/jquery.min.js') }}"></script>
-    <script src="{{ asset('bundles/attribute/js/bootstrap.min.js') }}"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 {% endblock %}
 </body>
 </html>
